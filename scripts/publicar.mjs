@@ -146,6 +146,38 @@ if (dominio) {
   console.log('sem domínio: robots fechado e noindex em todas as páginas');
 }
 
+/* ----------------------------------------- demonstração do painel */
+
+/**
+ * Publica junto uma cópia do site em /demonstracao, construída SEM banco.
+ *
+ * É o que permite o autor conhecer o painel antes de existir conta de
+ * administrador — e permanente, sem depender de nenhum computador ligado.
+ * Não há dado real ali: o painel roda em modo prévia, gravando num rascunho do
+ * próprio navegador, com tarja amarela permanente. Fica fora do buscador.
+ */
+const baseDemo = base.replace(/\/?$/, '/') + 'demonstracao/';
+execFileSync(process.execPath, [join(RAIZ, 'node_modules', 'vite', 'bin', 'vite.js'), 'build', '--outDir', 'dist/demonstracao', '--emptyOutDir'], {
+  cwd: RAIZ,
+  stdio: 'ignore',
+  env: { ...process.env, BASE: baseDemo, VITE_PREVIA: '1' },
+});
+copyFileSync(join(DIST, 'demonstracao', 'index.html'), join(DIST, 'demonstracao', '404.html'));
+writeFileSync(join(DIST, 'demonstracao', 'robots.txt'), 'User-agent: *\nDisallow: /\n', 'utf8');
+
+// A demonstração NÃO pode levar chave de banco: é o único build que qualquer
+// um abre sem senha, e o painel dela aceita entrar com um clique.
+const demoJs = readdirSync(join(DIST, 'demonstracao', 'assets')).filter((n) => n.endsWith('.js'));
+const demoSuja = demoJs.filter((n) => {
+  const c = readFileSync(join(DIST, 'demonstracao', 'assets', n), 'utf8');
+  return /sb_(?:publishable|secret)_[A-Za-z0-9_-]{12,}/.test(c) || /[a-z0-9]{20}\.supabase\.co/.test(c);
+});
+if (demoSuja.length) {
+  console.error('\nPUBLICAÇÃO BLOQUEADA — a demonstração levou referência ao banco: ' + demoSuja.join(', '));
+  process.exit(1);
+}
+console.log(`demonstração do painel em ${baseDemo} (sem banco, fora do buscador)`);
+
 /* ------------------------------------------------- varredura de segredo */
 
 // Padrões que NÃO podem sair daqui. A chave publicável (sb_publishable_ / a
