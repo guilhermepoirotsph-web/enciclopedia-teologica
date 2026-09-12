@@ -5,6 +5,7 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import Selo from '../marca/Selo';
 import Aparece from '../componentes/Aparece';
 import CardArtigo from '../componentes/CardArtigo';
+import CapaLivro from '../componentes/CapaLivro';
 import { montarRosacea, type Rosacea } from '../cena/rosacea';
 import { listarArtigos, listarEixos } from '../dados/fonte';
 import { SITE } from '../dados/configuracao';
@@ -390,7 +391,7 @@ function OAutor() {
               próprio texto quando a pesquisa pede.
             </p>
             <p>
-              É autor de <em>Na Terra dos Viventes — Espírito, Alma</em> e mantém este acervo aberto
+              É autor de <em>Na Terra dos Viventes — Espírito, Alma e Corpo</em> e mantém este acervo aberto
               desde abril de 2026, com revisão contínua de cada estudo publicado.
             </p>
           </Aparece>
@@ -415,18 +416,7 @@ function OLivro() {
     <section className="secao livro-faixa">
       <div className="miolo livro-faixa__grade">
         <Aparece className="livro-faixa__capa">
-          <div className="capa-livro">
-            <span className="capa-livro__selo">
-              <Selo tamanho={38} variante="compacto" />
-            </span>
-            <span className="capa-livro__titulo">
-              Na Terra
-              <br />
-              dos Viventes
-            </span>
-            <span className="capa-livro__sub">Espírito, Alma</span>
-            <span className="capa-livro__autor">Eleno Gutemberg</span>
-          </div>
+          <CapaLivro />
         </Aparece>
 
         <div>

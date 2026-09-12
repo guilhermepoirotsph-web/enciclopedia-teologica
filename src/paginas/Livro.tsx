@@ -1,5 +1,5 @@
 import Aparece from '../componentes/Aparece';
-import Selo from '../marca/Selo';
+import CapaLivro from '../componentes/CapaLivro';
 import { Link } from 'react-router-dom';
 import { SITE } from '../dados/configuracao';
 
@@ -20,21 +20,8 @@ export default function Livro() {
       <section className="secao">
         <div className="miolo livro-faixa__grade">
           <Aparece className="livro-faixa__capa">
-            <div className="capa-livro">
-              <span className="capa-livro__selo">
-                <Selo tamanho={38} variante="compacto" />
-              </span>
-              <span className="capa-livro__titulo">
-                Na Terra
-                <br />
-                dos Viventes
-              </span>
-              <span className="capa-livro__sub">Espírito, Alma</span>
-              <span className="capa-livro__autor">Eleno Gutemberg</span>
-            </div>
-            <p className="capa-livro__nota">
-              Capa provisória, em tipografia. A arte definitiva entra pelo painel.
-            </p>
+            <CapaLivro />
+            <p className="capa-livro__nota">1ª edição, 2026 · Editora DAS — Digital Ars Science</p>
           </Aparece>
 
           <div>

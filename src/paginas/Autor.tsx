@@ -25,7 +25,7 @@ export default function Autor() {
           <h1>Eleno Gutemberg</h1>
           <p className="olho">
             Pesquisador e escritor. Mantém esta enciclopédia desde abril de 2026, com revisão
-            contínua de cada estudo — e é autor de <em>Na Terra dos Viventes — Espírito, Alma</em>.
+            contínua de cada estudo — e é autor de <em>Na Terra dos Viventes — Espírito, Alma e Corpo</em>.
           </p>
         </div>
       </header>

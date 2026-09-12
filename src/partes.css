@@ -421,7 +421,9 @@
   display: grid;
   grid-template-columns: minmax(0, 320px) minmax(0, 1fr);
   gap: clamp(2rem, 5vw, 4.5rem);
-  align-items: center;
+  /* start, não center: a capa é quadrada e a coluna de texto é bem mais alta —
+     centralizar joga a capa para o meio do vazio. */
+  align-items: start;
 }
 @media (max-width: 820px) {
   .livro-faixa__grade {

@@ -136,6 +136,11 @@ export default function Nucleo() {
 function ObraCartao({ o }: { o: Obra }) {
   return (
     <article className={`cartao obra ${o.exemplo ? 'obra--preparo' : ''}`}>
+      {o.capa && (
+        <div className="obra__capa">
+          <img src={o.capa} alt={`Capa de ${o.titulo}`} loading="lazy" />
+        </div>
+      )}
       <div className="cartao__eixo">{TIPO[o.tipo]}</div>
       <h3 className="cartao__titulo">{o.titulo}</h3>
       {o.subtitulo && <p className="obra__sub">{o.subtitulo}</p>}

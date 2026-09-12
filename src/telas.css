@@ -708,3 +708,28 @@
   padding-bottom: 1rem;
   border-bottom: 1px solid var(--linha-suave);
 }
+
+/* Capa real do livro (600x600, quadrada). Moldura fina de ouro para a arte
+   não flutuar solta sobre o fundo escuro. */
+.capa-real {
+  margin: 0;
+}
+.capa-real img {
+  width: 100%;
+  height: auto;
+  border-radius: 3px;
+  display: block;
+}
+.capa-real--moldura img {
+  border: 1px solid var(--ouro-sombra);
+  box-shadow: 0 30px 70px -40px #000;
+}
+.obra__capa {
+  margin: -1.6rem -1.5rem 1.2rem;
+}
+.obra__capa img {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-bottom: 1px solid var(--linha-suave);
+}

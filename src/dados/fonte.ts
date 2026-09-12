@@ -133,10 +133,10 @@ const OBRAS_BASE: Obra[] = [
   {
     slug: 'na-terra-dos-viventes',
     titulo: 'Na Terra dos Viventes',
-    subtitulo: 'Espírito, Alma e Corpo',
+    subtitulo: 'Espírito, Alma e Corpo · 1ª edição, 2026',
     descricao:
       'O livro em que Eleno Gutemberg destrincha a constituição tripartida do ser humano — o que é espírito, o que é alma, o que morre, o que permanece — e o que as Escrituras dizem sobre a terra dos viventes.',
-    capa: null,
+    capa: '/marca/livro-capa.png',
     tipo: 'livro',
     precoCentavos: null,
     linkExterno: 'https://go.hotmart.com/I103629686U',
