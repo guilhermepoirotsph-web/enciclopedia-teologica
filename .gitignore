@@ -1,0 +1,9 @@
+node_modules
+dist
+.env
+.env.local
+SENHAS-NAO-COMITAR.txt
+_acervo/
+.DS_Store
+_capturas/
+_arte-temp/

@@ -1,0 +1,12 @@
+# Enciclopédia Teológica e Antropológica
+
+User-agent: *
+Allow: /
+
+# O painel do autor não tem por que ser indexado.
+Disallow: /painel
+Disallow: /entrar
+Disallow: /conta
+
+# Trocar pelo domínio definitivo quando ele existir.
+Sitemap: https://enciclopediateologica.com.br/sitemap.xml
