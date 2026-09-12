@@ -57,7 +57,10 @@ body {
   font-size: 16px;
   line-height: 1.65;
   -webkit-font-smoothing: antialiased;
-  overflow-x: hidden;
+  /* `clip`, não `hidden`: overflow hidden no body cria um container de rolagem
+     e quebra o `position: sticky` do hero. `clip` corta igual, sem criar
+     container. */
+  overflow-x: clip;
 }
 
 /* O grão de papel antigo sobre o escuro tira o aspecto de "tela preta chapada".

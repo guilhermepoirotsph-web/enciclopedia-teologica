@@ -2,6 +2,7 @@ import { Suspense, lazy, useEffect } from 'react';
 import { Navigate, Route, Routes, useLocation } from 'react-router-dom';
 import Cabecalho from './componentes/Cabecalho';
 import Rodape from './componentes/Rodape';
+import Barreira from './componentes/Barreira';
 import Inicio from './paginas/Inicio';
 import Biblioteca from './paginas/Biblioteca';
 import Artigo from './paginas/Artigo';
@@ -57,7 +58,8 @@ export default function App() {
       <AoTrocarDeRota />
       {!noPainel && <Cabecalho />}
       <main id="conteudo">
-        <Suspense fallback={<Carregando />}>
+        <Barreira>
+          <Suspense fallback={<Carregando />}>
           <Routes>
             <Route path="/" element={<Inicio />} />
             <Route path="/biblioteca" element={<Biblioteca />} />
@@ -84,7 +86,8 @@ export default function App() {
             />
             <Route path="*" element={<Institucional pagina="perdida" />} />
           </Routes>
-        </Suspense>
+          </Suspense>
+        </Barreira>
       </main>
       {!noPainel && <Rodape />}
     </>

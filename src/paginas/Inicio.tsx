@@ -49,7 +49,8 @@ export default function Inicio() {
 /* ------------------------------------------------------------------ hero */
 
 function Hero({ total }: { total: number }) {
-  const secao = useRef<HTMLElement>(null);
+  const trilhoRef = useRef<HTMLDivElement>(null);
+  const secao = useRef<HTMLDivElement>(null);
   const palco = useRef<HTMLDivElement>(null);
   const [semWebgl, setSemWebgl] = useState(false);
 
@@ -83,12 +84,19 @@ function Hero({ total }: { total: number }) {
       }
 
       if (cena && !desligado) {
+        /* NADA de `pin: true` aqui.
+           O pin do ScrollTrigger EMBRULHA o elemento num `.pin-spacer` — ou
+           seja, tira o hero do pai dele e coloca dentro de uma div nova. O
+           React não sabe disso. Na hora em que o visitante clica num link e a
+           home desmonta, o React tenta `main.removeChild(hero)`, o hero já não
+           é filho do main, e o erro derruba a árvore inteira: tela preta em
+           QUALQUER clique. O efeito visual é idêntico com `position: sticky`
+           no CSS, que não mexe no DOM — aqui o ScrollTrigger só informa o
+           progresso. */
         ScrollTrigger.create({
-          trigger: sec,
+          trigger: trilhoRef.current!,
           start: 'top top',
-          end: '+=110%',
-          pin: true,
-          pinSpacing: true,
+          end: 'bottom bottom',
           scrub: 0.6,
           onUpdate: (s) => {
             cena!.setProgresso(s.progress);
@@ -123,7 +131,10 @@ function Hero({ total }: { total: number }) {
   }, []);
 
   return (
-    <section className="hero" ref={secao}>
+    // O trilho é alto; o hero gruda no topo por `position: sticky` enquanto o
+    // trilho passa. Mesmo efeito do pin, sem ninguém mexer no DOM do React.
+    <section className="hero-trilho" ref={trilhoRef}>
+      <div className="hero" ref={secao}>
       <div className="hero__palco" ref={palco} aria-hidden="true" />
       {semWebgl && <div className="hero__vitral-css" aria-hidden="true" />}
 
@@ -166,8 +177,9 @@ function Hero({ total }: { total: number }) {
         </p>
       </div>
 
-      <div className="hero__desce" aria-hidden="true">
-        <span />
+        <div className="hero__desce" aria-hidden="true">
+          <span />
+        </div>
       </div>
     </section>
   );

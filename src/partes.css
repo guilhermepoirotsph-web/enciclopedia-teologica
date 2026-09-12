@@ -142,9 +142,19 @@
 
 /* ---------------------------------------------------------------- hero */
 
-.hero {
+/* O trilho dá o curso do scroll; o hero gruda no topo enquanto ele passa.
+   Substitui o `pin` do ScrollTrigger, que embrulhava o hero num `.pin-spacer`
+   e derrubava a árvore do React no desmonte da rota (tela preta em qualquer
+   clique). Mesmo efeito, sem ninguém mexer no DOM. */
+.hero-trilho {
   position: relative;
-  min-height: 100svh;
+  height: 210svh;
+}
+
+.hero {
+  position: sticky;
+  top: 0;
+  height: 100svh;
   display: flex;
   align-items: center;
   overflow: hidden;
