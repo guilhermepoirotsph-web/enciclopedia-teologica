@@ -13,8 +13,19 @@ import { createClient, type SupabaseClient } from '@supabase/supabase-js';
  * Enquanto estiver em branco, o site roda inteiro em cima do acervo publicado
  * em /conteudo (97 artigos), e o painel entra em MODO PRÉVIA.
  */
-export const SUPABASE_URL = 'https://xssklzwhkxmavtcjorre.supabase.co';
-export const SUPABASE_CHAVE_PUBLICAVEL = 'sb_publishable_33CrvSMfufyae8yPo317RQ_1CeKFJ8r';
+/**
+ * Build de PRÉVIA (`VITE_PREVIA=1`): sai sem banco de propósito.
+ *
+ * Não é economia nem preguiça — é o que permite mostrar o painel para o autor
+ * ANTES de existir uma conta de administrador. Sem banco, o site lê o acervo
+ * publicado em /conteudo (o mesmo conteúdo) e o painel entra em modo prévia,
+ * com tarja permanente avisando que nada é salvo. Aprovado o desenho, o build
+ * normal volta a falar com o Supabase.
+ */
+const previa = import.meta.env.VITE_PREVIA === '1';
+
+export const SUPABASE_URL = previa ? '' : 'https://xssklzwhkxmavtcjorre.supabase.co';
+export const SUPABASE_CHAVE_PUBLICAVEL = previa ? '' : 'sb_publishable_33CrvSMfufyae8yPo317RQ_1CeKFJ8r';
 
 export const temBanco = Boolean(SUPABASE_URL && SUPABASE_CHAVE_PUBLICAVEL);
 
