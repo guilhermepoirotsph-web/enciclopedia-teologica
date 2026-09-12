@@ -1,0 +1,3 @@
+# Endereco provisorio: fora do buscador ate o dominio definitivo.
+User-agent: *
+Disallow: /
