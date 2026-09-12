@@ -13,8 +13,8 @@ import { createClient, type SupabaseClient } from '@supabase/supabase-js';
  * Enquanto estiver em branco, o site roda inteiro em cima do acervo publicado
  * em /conteudo (97 artigos), e o painel entra em MODO PRÉVIA.
  */
-export const SUPABASE_URL = '';
-export const SUPABASE_CHAVE_PUBLICAVEL = '';
+export const SUPABASE_URL = 'https://xssklzwhkxmavtcjorre.supabase.co';
+export const SUPABASE_CHAVE_PUBLICAVEL = 'sb_publishable_33CrvSMfufyae8yPo317RQ_1CeKFJ8r';
 
 export const temBanco = Boolean(SUPABASE_URL && SUPABASE_CHAVE_PUBLICAVEL);
 

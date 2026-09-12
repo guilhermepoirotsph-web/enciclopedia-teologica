@@ -223,10 +223,17 @@ create trigger trava_promocao_trg
   before update on public.perfis
   for each row execute function public.trava_promocao();
 
+-- Carimba a data de revisão AUTOMATICAMENTE — mas só quando quem escreveu não
+-- disse qual é. Carimbar sempre destrói a data verdadeira: o seed do acervo traz
+-- a data real de revisão de cada estudo (algumas de abril), e uma reexecução do
+-- seed com `on conflict do update` fazia o gatilho trocar todas por "agora".
+-- Um acervo em que 97 estudos foram "revisados hoje" não engana ninguém.
 create or replace function public.carimbar_atualizacao()
 returns trigger language plpgsql as $$
 begin
-  new.atualizado_em := now();
+  if new.atualizado_em is not distinct from old.atualizado_em then
+    new.atualizado_em := now();
+  end if;
   return new;
 end;
 $$;
@@ -312,7 +319,11 @@ create or replace view public.artigos_publicos as
     a.slug, a.titulo, a.icone, a.eixos, a.resumo, a.capa,
     a.palavras, a.minutos, a.premium, a.criado_em, a.atualizado_em,
     -- o corpo do artigo pago NÃO sai por aqui, nem cortado
-    case when a.premium then null else a.corpo end as corpo
+    case when a.premium then null else a.corpo end as corpo,
+    -- referências bíblicas citadas: metadado público, e é por elas que a busca
+    -- por "João 3:16" encontra o estudo. Sem esta coluna a busca do site
+    -- funciona no acervo embutido e emudece quando o banco liga.
+    a.referencias
   from public.artigos a
   where a.publicado;
 

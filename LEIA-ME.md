@@ -20,55 +20,91 @@ Abre em <http://127.0.0.1:5178>.
 | Comando | O que faz |
 | --- | --- |
 | `npm run dev` | sobe o site local |
-| `npm run build` | gera `dist/` para publicar |
+| `node scripts/publicar.mjs` | build + 404 + varredura de segredo → `dist/` |
 | `npm run conteudo` | regera o acervo a partir de `_acervo/acervo.json` |
-| `npm run arte` | regera logo social, ícones e OG |
+| `npm run arte` | regera selo social, ícones e OG |
 | `node sql/provar.mjs` | roda as 14 provas do banco em PGlite |
+| `node scripts/conferir-banco.mjs` | confere o banco de fora, como um visitante |
 | `node scripts/capturar.mjs 5178` | tira print de todas as telas |
 
 ---
 
-## O que está pronto e o que falta
+## Situação
 
-### Pronto
-- 97 estudos reais, com data de criação e de revisão de cada um
-- 32 eixos temáticos, busca sem acento, filtro e ordenação
-- Hero 3D (rosácea em WebGL) com mergulho pelo scroll
-- Página de estudo com índice lateral, referências bíblicas e barra de leitura
-- Núcleo de Estudos com muro de conteúdo e catálogo de obras
-- Livro **Na Terra dos Viventes** com link real da Hotmart
-- Painel do autor completo, com modo prévia enquanto não há banco
-- Pix nativo pronto (falta só a chave), nota de esclarecimento, direitos autorais, privacidade
-- Esquema SQL com RLS provada
+### Pronto e provado
+- **Banco Supabase ligado e semeado** — projeto `xssklzwhkxmavtcjorre`, 97 estudos e
+  32 eixos. O texto de cada estudo foi comparado byte a byte com o original:
+  **97 de 97 idênticos**.
+- RLS provada de fora: as views públicas respondem, as tabelas cruas devolvem
+  **zero linhas** para a chave pública.
+- 97 estudos com data de criação e de revisão, busca sem acento, filtro e ordenação.
+- Hero 3D (rosácea em WebGL) com mergulho pelo scroll.
+- Página de estudo com índice lateral, referências bíblicas e barra de leitura.
+- Núcleo de Estudos com muro de conteúdo cortado **no servidor**.
+- Livro **Na Terra dos Viventes** com capa real e link da Hotmart.
+- Painel do autor completo; cai em modo prévia se o banco sumir.
+- Pix nativo pronto (falta só a chave), nota de esclarecimento, direitos, privacidade.
 
-### Falta (depende de informação ou de ação humana)
-1. **Supabase**: criar o projeto e colar URL + chave em `src/dados/supabase.ts`
-2. **Contatos do Eleno**: WhatsApp, e-mail, Instagram, YouTube
-3. **Chave Pix** e nome do recebedor
-4. **Capa do livro** e retrato do autor (hoje há capa tipográfica e o selo no lugar)
-5. **Domínio** e publicação
+### Falta — depende de informação ou de gesto humano
+1. **Contatos do Eleno**: WhatsApp, e-mail, Instagram, YouTube.
+2. **Chave Pix** e nome do recebedor.
+3. **Retrato do autor** (a capa do livro já está no ar).
+4. **Conta de administrador**: o Eleno cria em `/entrar`, confirma o e-mail, e aí
+   `sql/03-promover.sql` roda com o e-mail dele.
+5. **Repositório no GitHub e domínio** para publicar.
 
-Enquanto 2, 3 e 4 não chegam, o site **esconde** o botão correspondente em vez de
+Enquanto 1, 2 e 3 não chegam, o site **esconde** o botão correspondente em vez de
 mostrar link morto ou dado inventado.
 
 ---
 
-## Ligar o banco (uma vez só)
+## Publicar — GitHub Pages
 
-1. Criar um projeto Supabase **novo, dedicado a este site**.
-2. SQL Editor → colar e rodar, nesta ordem:
-   - `sql/01-schema.sql`
-   - `sql/02-seed.sql` (os 97 estudos)
-   - `sql/03-promover.sql` (trocando o e-mail pelo do Eleno)
-3. Authentication → Providers → Email: deixar **confirmação de e-mail ligada**.
-4. Copiar *Project URL* e *anon/publishable key* para `src/dados/supabase.ts`.
+> **Lovable saiu do caminho em 12/09/2026**: o plano premium acabou e o selo
+> “Edited with Lovable” não sai sem plano. A hospedagem passou a ser GitHub Pages —
+> grátis, já usada em outros sites da casa e com domínio próprio suportado.
 
-> As chaves ficam **hardcodadas** nesse arquivo, não em `VITE_*`: o Lovable Cloud
-> reescreve variáveis de ambiente e apontaria o site para o banco gerenciado dele.
-> A `service_role` **nunca** entra no projeto.
+```bash
+node scripts/publicar.mjs
+```
 
-Antes de existir banco, o site inteiro funciona lendo `public/conteudo/` e o painel
-entra em **modo prévia** (tarja amarela permanente, nada é salvo no servidor).
+Gera `dist/` pronto. O script:
+
+- builda com a `base` certa (`/` com domínio próprio, `/nome-do-repo/` sem);
+- copia `index.html` para `404.html` — é isso que faz `/biblioteca` abrir direto,
+  em vez de dar 404 no GitHub Pages;
+- grava o `CNAME` quando você passa o domínio;
+- **varre a saída atrás de segredo e recusa publicar se achar.** Provado com uma
+  chave secreta plantada no código: bloqueou e apontou o arquivo.
+
+```bash
+node scripts/publicar.mjs /enciclopedia-teologica/          # página de projeto
+node scripts/publicar.mjs / enciclopediateologica.com.br    # com domínio
+```
+
+O conteúdo de `dist/` é o que vai para a branch de publicação.
+
+**O repositório pode ser público.** A única chave no código é a *publicável*, que
+existe justamente para ficar no navegador — quem decide o que ela alcança é a RLS.
+A `service_role` nunca entrou no projeto, e o script recusa publicar se entrar.
+
+---
+
+## O banco
+
+Projeto dedicado no Supabase (`xssklzwhkxmavtcjorre`), criado em 12/09/2026.
+URL e chave ficam **hardcodadas** em `src/dados/supabase.ts` — não em `VITE_*` —
+porque plataforma que gerencia deploy costuma reescrever variável de ambiente e
+apontar o site para outro banco sem avisar.
+
+Para recriar do zero, no SQL Editor e nesta ordem:
+
+1. `sql/01-schema.sql`
+2. as fatias de `sql/fatias/` (geradas por `node scripts/fatiar-seed.mjs`) — o seed
+   inteiro tem 730 KB e trava o editor
+3. `sql/03-promover.sql`, trocando o e-mail
+
+Depois, sempre: `node scripts/conferir-banco.mjs`.
 
 ---
 
@@ -77,20 +113,19 @@ entra em **modo prévia** (tarja amarela permanente, nada é salvo no servidor).
 O corte **não** é feito no navegador:
 
 - `scripts/gerar-conteudo.mjs` **não publica** em `public/` o corpo de nenhum
-  estudo marcado como Núcleo — arquivo em `public/` é servido a quem souber o
-  endereço.
+  estudo marcado como Núcleo — arquivo em `public/` é servido a quem souber o endereço.
 - A view `artigos_publicos` devolve `corpo = null` para estudo pago.
 - A função `ler_artigo` decide no servidor, pela assinatura de quem chamou, se
-  devolve o texto inteiro ou a prévia.
+  devolve o texto inteiro ou só a prévia.
 
-Provado em `sql/provar.mjs` (14 provas, todas passando), inclusive: leitor logado
-sem assinatura continua barrado, assinatura vencida perde o acesso, e usuário
-comum não consegue se promover a admin.
+Provado em `sql/provar.mjs` — 14 provas, todas passando: leitor logado sem
+assinatura continua barrado, assinatura vencida perde o acesso, usuário comum não
+se promove a admin, visitante envia mensagem mas não lê a caixa.
 
 ### O que este site **não** faz
 Não impede cópia. Nenhum site impede: o que o navegador mostra, o visitante lê.
 O que existe aqui é registro de autoria com data, regras de uso escritas em
-`/direitos` e o conteúdo pago fora do alcance de quem não pagou. Prometer
+`/direitos`, e o conteúdo pago fora do alcance de quem não pagou. Prometer
 “criptografar para ninguém clonar” seria vender o que não existe.
 
 ---
@@ -100,9 +135,9 @@ O que existe aqui é registro de autoria com data, regras de uso escritas em
 ```
 _acervo/          acervo bruto lido do Notion (fora do git)
 public/conteudo/  catálogo + corpo dos estudos abertos (gerado)
-public/marca/     selo, og.png, ícones (gerado)
-scripts/          gerar-conteudo, gerar-arte, capturar
-sql/              01-schema, 02-seed (gerado), 03-promover, provar.mjs
+public/marca/     selo, og.png, ícones, capa do livro
+scripts/          gerar-conteudo, gerar-arte, fatiar-seed, publicar, capturar, conferir-banco
+sql/              01-schema, 02-seed (gerado), fatias/, 03-promover, provar.mjs
 src/cena/         rosácea 3D (three.js)
 src/dados/        fonte, supabase, sessão, pix, painel, rascunho
 src/marca/        selo e assinatura em SVG

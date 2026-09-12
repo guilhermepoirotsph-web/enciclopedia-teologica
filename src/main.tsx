@@ -13,7 +13,11 @@ document.documentElement.classList.remove('sem-js');
 
 createRoot(document.getElementById('raiz')!).render(
   <StrictMode>
-    <BrowserRouter>
+    {/* basename acompanha o `base` do Vite: no domínio próprio é '/', no
+        GitHub Pages sem domínio é '/repo/'. Sem isso, publicar em subpasta
+        faz todo link interno apontar para a raiz do domínio e o site vira
+        uma sequência de 404. */}
+    <BrowserRouter basename={import.meta.env.BASE_URL}>
       <ProvedorSessao>
         <App />
       </ProvedorSessao>

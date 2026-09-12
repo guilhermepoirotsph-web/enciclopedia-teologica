@@ -1,7 +1,19 @@
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 
+/**
+ * `base` decide o prefixo de todos os caminhos do site.
+ *
+ *   domínio próprio (enciclopediateologica.com.br)      -> '/'
+ *   GitHub Pages sem domínio (usuario.github.io/repo/)  -> '/repo/'
+ *
+ * Passa por variável de ambiente para não precisar editar código na hora de
+ * publicar:  BASE=/enciclopedia-teologica/ npm run build
+ */
+const base = process.env.BASE || '/';
+
 export default defineConfig({
+  base,
   plugins: [react()],
   server: { host: '127.0.0.1', port: 5178 },
   build: {

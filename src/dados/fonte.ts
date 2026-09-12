@@ -40,7 +40,7 @@ export async function listarArtigos(): Promise<Artigo[]> {
   if (temBanco) {
     const { data, error } = await supabase!
       .from('artigos_publicos')
-      .select('slug,titulo,icone,eixos,resumo,criado_em,atualizado_em,palavras,minutos,premium,capa')
+      .select('slug,titulo,icone,eixos,resumo,criado_em,atualizado_em,palavras,minutos,premium,capa,referencias')
       .order('atualizado_em', { ascending: false });
     if (!error && data?.length) {
       return (data as Record<string, unknown>[]).map((a) => ({
@@ -53,7 +53,7 @@ export async function listarArtigos(): Promise<Artigo[]> {
         atualizado: (a.atualizado_em as string) ?? null,
         palavras: (a.palavras as number) ?? 0,
         minutos: (a.minutos as number) ?? 3,
-        referencias: [],
+        referencias: (a.referencias as string[]) ?? [],
         premium: Boolean(a.premium),
         publicado: true,
         capa: (a.capa as string) ?? null,
