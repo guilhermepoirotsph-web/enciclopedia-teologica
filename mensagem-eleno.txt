@@ -1,49 +1,98 @@
-═══════════════════════════════════════════════════
-MENSAGEM 1 — o site
-═══════════════════════════════════════════════════
+╔══════════════════════════════════════════════════╗
+║  MENSAGEM 1 — O SITE                             ║
+╚══════════════════════════════════════════════════╝
 
 Tio, boa noite! 🙏
 
-O site da Enciclopédia Teológica e Antropológica já está no ar. Todos os 97 artigos do Notion estão lá, organizados nos 32 temas, cada um com a data de revisão que o senhor tinha.
+O site da *Enciclopédia Teológica e Antropológica* está pronto e no ar. Os *97 artigos* do seu Notion estão todos lá, organizados nos *32 temas*, cada um com a data de revisão que o senhor já tinha.
 
-https://guilhermepoirotsph-web.github.io/enciclopedia-teologica/
+👉 https://guilhermepoirotsph-web.github.io/enciclopedia-teologica/
 
-Esse link é permanente, pode abrir no celular, mandar para quem quiser mostrar. Ainda não é o endereço definitivo — quando comprarmos o domínio (uma coisa curta, tipo enciclopediateologica.com.br), ele muda para esse nome e fica mais fácil de divulgar. Por enquanto ele está propositalmente fora do Google, para o endereço provisório não competir com o definitivo depois.
+Pode abrir no celular e mandar para quem quiser mostrar.
 
-Dá uma olhada com calma, principalmente:
-• se algum texto ficou diferente do que o senhor escreveu
-• se algum artigo está no tema errado
-• a página do livro, que já está com a capa e o botão da Hotmart
+O que o senhor vai encontrar:
 
-Me diz o que achou.
+• *Biblioteca* — os 97 estudos, com busca. Dá para procurar por tema, por palavra do título ou até por versículo (ex.: “João 3:16”)
+• *Eixos temáticos* — o acervo organizado pelos 32 assuntos
+• *O Livro* — “Na Terra dos Viventes”, com a capa e o botão que leva para a Hotmart
+• *O Autor* — sua página
+• *Apoie a obra* — onde entra o Pix, assim que o senhor me mandar a chave
+• *Nota de esclarecimento* e *Direitos autorais* — o seu texto sobre liberdade de crença, e as regras de uso dos artigos
+
+⚠️ Duas observações honestas:
+
+1) Esse endereço ainda é provisório. Quando registrarmos o domínio (algo curto, tipo _enciclopediateologica.com.br_), o site passa a atender por ele.
+
+2) Por isso ele está *propositalmente fora do Google* por enquanto — para o endereço provisório não atrapalhar o definitivo depois. Assim que o domínio existir, eu libero e aí sim ele aparece nas buscas.
 
 
-═══════════════════════════════════════════════════
-MENSAGEM 2 — o que falta do seu lado
-═══════════════════════════════════════════════════
+╔══════════════════════════════════════════════════╗
+║  MENSAGEM 2 — O PAINEL DE ADMINISTRAÇÃO          ║
+╚══════════════════════════════════════════════════╝
 
-Tio, para terminar eu preciso de 6 coisas suas. Pode mandar aos poucos:
+Tio, o site tem um *painel só seu*, onde o senhor escreve, edita e publica artigo novo sozinho, sem depender de mim para nada.
 
-1) SEU WHATSAPP
+Preparei uma *demonstração* para o senhor conhecer o painel agora, sem precisar de senha:
+
+👉 https://guilhermepoirotsph-web.github.io/enciclopedia-teologica/demonstracao/
+
+Nessa demonstração, clique em *ENTRAR* (canto direito) e depois no botão *“Ver o painel do autor”*.
+
+Vai aparecer uma tarja amarela escrito MODO PRÉVIA. Ela existe de propósito: nessa demonstração o senhor pode clicar em tudo, mexer em tudo, *sem medo de estragar nada* — nada ali é salvo de verdade. É só para conhecer.
+
+O que tem dentro:
+
+• *Resumo* — quantos estudos, quantos temas, o que ainda falta
+• *Estudos* — a lista dos 97, com busca e filtro. Cada linha tem duas chavinhas: _No ar_ (se aparece no site) e _Núcleo_ (se é conteúdo pago)
+• *Escrever novo* — o editor, com botão “Como vai aparecer” para conferir antes de publicar
+• *Importar do Notion* — se o senhor escrever algo lá, é só copiar e colar aqui
+• *Núcleo* — o conteúdo pago
+• *Mensagens e membros* — quem escreveu pelo site
+• *Configurações* — WhatsApp, e-mail, Pix
+• *Como usar* — um tutorial escrito, botão por botão
+
+Para ter o *painel de verdade* (esse que salva), o passo está na próxima mensagem.
+
+
+╔══════════════════════════════════════════════════╗
+║  MENSAGEM 3 — O QUE FALTA DO SEU LADO            ║
+╚══════════════════════════════════════════════════╝
+
+Tio, para terminar eu preciso de *6 coisas suas*. Pode mandar aos poucos:
+
+*1) Seu WhatsApp*
 Com DDD, o número que o senhor quer que apareça no site.
 
-2) SEU E-MAIL
-O e-mail de contato da página "Fale conosco".
+*2) Seu e-mail*
+O e-mail de contato da página “Fale conosco”.
 
-3) INSTAGRAM E YOUTUBE
+*3) Instagram e YouTube*
 Se tiver, me manda o endereço. Se não tiver, sem problema — o botão simplesmente não aparece.
 
-4) SUA CHAVE PIX
-Qual chave o senhor quer usar para receber as contribuições (CPF, e-mail, telefone ou aleatória) e o NOME que está cadastrado no banco. É para a página "Apoie a obra", que hoje está sem nada — não coloquei nenhuma chave inventada.
+*4) Sua chave Pix*
+Qual chave o senhor quer usar para receber as contribuições (CPF, e-mail, telefone ou aleatória) e o *nome que está cadastrado no banco*. É para a página “Apoie a obra”, que hoje está vazia — eu não coloquei nenhuma chave inventada.
 
-5) UMA FOTO SUA
-Foto de rosto, bem iluminada, para a página "O Autor". Pode ser do celular. Se for iPhone, mande pelo WhatsApp normal (não como documento), senão vem num formato que muitos computadores não abrem.
+*5) Uma foto sua*
+Foto de rosto, bem iluminada, para a página “O Autor”. Pode ser do celular. Se for iPhone, mande pelo WhatsApp normal (não como documento), senão vem num formato que muitos computadores não abrem.
 
-6) CRIAR SUA CONTA
-No site, clique em ENTRAR → "Criar conta", coloque seu e-mail e ESCOLHA UMA SENHA SUA. Vai chegar um e-mail de confirmação — confirme e me avise. Aí eu libero o seu acesso de administrador, que é o painel onde o senhor escreve, edita e publica artigo novo sozinho, sem depender de mim.
+*6) Criar sua conta* ← _este é o do painel de verdade_
+No site, clique em *ENTRAR* → *“Criar conta”*, coloque seu e-mail e *escolha uma senha sua*. Vai chegar um e-mail de confirmação — confirme e me avise. Aí eu libero seu acesso de administrador e o painel passa a salvar de verdade.
 
-Eu não vou saber essa senha e não preciso saber.
+🔒 Essa senha é *só sua*. Eu não vou saber e não preciso saber.
 
-Duas coisas que já ficaram prontas: a capa do livro (peguei do seu Notion) e o painel de administração, com um tutorial dentro explicando cada botão.
+Uma coisa que já resolvi: a capa do livro eu peguei do seu próprio Notion e ela já está no site.
 
-E fica registrado: eu não alterei nada no seu Notion. Só li.
+E fica registrado: *eu não alterei nada no seu Notion*. Só li.
+
+
+╔══════════════════════════════════════════════════╗
+║  MENSAGEM 4 — (opcional) ONDE O PROJETO MORA     ║
+╚══════════════════════════════════════════════════╝
+
+Tio, se tiver curiosidade de ver o projeto por dentro, ele fica guardado aqui:
+
+👉 https://github.com/guilhermepoirotsph-web/enciclopedia-teologica
+
+Isso é o *GitHub* — uma espécie de arquivo onde fica guardado tudo que o site é feito, com o histórico de cada alteração e a data. O senhor *não precisa fazer nada lá*; é mais para o senhor saber que o trabalho está guardado e organizado, e não preso na cabeça de ninguém.
+
+Uma coisa importante para o senhor saber: esse arquivo é *público*, e o texto dos 97 artigos está lá dentro também. Não tem nada de senha nem de dado pessoal — mas se o senhor preferir que fique fechado, me avisa que eu fecho.
