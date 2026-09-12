@@ -1,51 +1,49 @@
 ═══════════════════════════════════════════════════
-MENSAGEM 1 — a prévia
+MENSAGEM 1 — o site
 ═══════════════════════════════════════════════════
 
-Tio, boa tarde! 🙏
+Tio, boa noite! 🙏
 
-Montei o site da Enciclopédia Teológica e Antropológica e já está pronto para o senhor olhar. Todos os 97 artigos do Notion estão lá dentro, organizados nos 32 temas, com a data de revisão de cada um.
+O site da Enciclopédia Teológica e Antropológica já está no ar. Todos os 97 artigos do Notion estão lá, organizados nos 32 temas, cada um com a data de revisão que o senhor tinha.
 
-Link da prévia:
-https://lip-jimmy-authentic-plugin.trycloudflare.com
+https://guilhermepoirotsph-web.github.io/enciclopedia-teologica/
 
-Vai pedir usuário e senha:
-usuário: eleno
-senha: portico2026
+Esse link é permanente, pode abrir no celular, mandar para quem quiser mostrar. Ainda não é o endereço definitivo — quando comprarmos o domínio (uma coisa curta, tipo enciclopediateologica.com.br), ele muda para esse nome e fica mais fácil de divulgar. Por enquanto ele está propositalmente fora do Google, para o endereço provisório não competir com o definitivo depois.
 
-Para ver o painel de administração (onde o senhor escreve e publica os artigos), é só acrescentar /painel no fim do endereço, ou clicar em ENTRAR e depois em "Ver o painel do autor".
+Dá uma olhada com calma, principalmente:
+• se algum texto ficou diferente do que o senhor escreveu
+• se algum artigo está no tema errado
+• a página do livro, que já está com a capa e o botão da Hotmart
 
-Duas observações importantes:
-• Nesta prévia o painel abre inteiro para o senhor conhecer, mas nada que mexer ali é salvo. É só para aprovar o visual.
-• O link só funciona enquanto meu computador estiver ligado. Se abrir e não carregar, me chama que eu religo.
-
-Dá uma olhada com calma e me diz o que achou — principalmente se algum texto ficou diferente do que o senhor escreveu.
+Me diz o que achou.
 
 
 ═══════════════════════════════════════════════════
-MENSAGEM 2 — o que falta do lado dele
+MENSAGEM 2 — o que falta do seu lado
 ═══════════════════════════════════════════════════
 
-Tio, para o site ir ao ar de verdade eu preciso de 6 coisas suas. Pode mandar aos poucos, conforme for conseguindo:
+Tio, para terminar eu preciso de 6 coisas suas. Pode mandar aos poucos:
 
 1) SEU WHATSAPP
-Com DDD, o número que o senhor quer que apareça no site para as pessoas falarem com o senhor.
+Com DDD, o número que o senhor quer que apareça no site.
 
 2) SEU E-MAIL
-O e-mail de contato que vai aparecer na página "Fale conosco".
+O e-mail de contato da página "Fale conosco".
 
 3) INSTAGRAM E YOUTUBE
-Se o senhor tiver, me manda o endereço de cada um. Se não tiver, sem problema — o botão simplesmente não aparece.
+Se tiver, me manda o endereço. Se não tiver, sem problema — o botão simplesmente não aparece.
 
 4) SUA CHAVE PIX
-Qual chave o senhor quer usar para receber as contribuições (CPF, e-mail, telefone ou chave aleatória) e o NOME que está cadastrado no banco. É para a página "Apoie a obra", que hoje está sem nada — não coloquei nenhuma chave inventada.
+Qual chave o senhor quer usar para receber as contribuições (CPF, e-mail, telefone ou aleatória) e o NOME que está cadastrado no banco. É para a página "Apoie a obra", que hoje está sem nada — não coloquei nenhuma chave inventada.
 
 5) UMA FOTO SUA
-Uma foto de rosto, de preferência bem iluminada, para a página "O Autor". Pode ser do celular mesmo. Se for iPhone, por favor mande pelo WhatsApp normal (não como documento) para não vir naquele formato que alguns computadores não abrem.
+Foto de rosto, bem iluminada, para a página "O Autor". Pode ser do celular. Se for iPhone, mande pelo WhatsApp normal (não como documento), senão vem num formato que muitos computadores não abrem.
 
 6) CRIAR SUA CONTA
-Quando eu avisar que o site está publicado, o senhor entra em /entrar, clica em "Criar conta", coloca o e-mail e ESCOLHE UMA SENHA SUA. Eu não vou saber essa senha e não preciso saber — depois que o senhor criar, eu libero o acesso de administrador para o senhor.
+No site, clique em ENTRAR → "Criar conta", coloque seu e-mail e ESCOLHA UMA SENHA SUA. Vai chegar um e-mail de confirmação — confirme e me avise. Aí eu libero o seu acesso de administrador, que é o painel onde o senhor escreve, edita e publica artigo novo sozinho, sem depender de mim.
 
-Uma coisa que já resolvi: a capa do livro "Na Terra dos Viventes" eu peguei do seu Notion e já está no site, na página do livro e na página inicial, com o botão de compra levando para a Hotmart.
+Eu não vou saber essa senha e não preciso saber.
+
+Duas coisas que já ficaram prontas: a capa do livro (peguei do seu Notion) e o painel de administração, com um tutorial dentro explicando cada botão.
 
 E fica registrado: eu não alterei nada no seu Notion. Só li.
