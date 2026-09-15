@@ -8,7 +8,8 @@
     "build": "tsc -b --noCheck && vite build",
     "preview": "vite preview",
     "conteudo": "node scripts/gerar-conteudo.mjs",
-    "arte": "node scripts/gerar-arte.mjs"
+    "arte": "node scripts/gerar-arte.mjs",
+    "build:pages": "node scripts/publicar.mjs /"
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.45.4",

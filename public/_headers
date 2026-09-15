@@ -1,0 +1,33 @@
+# Cabeçalhos servidos pelo Cloudflare Pages.
+# Um arquivo por linha de regra; o caminho vem primeiro, os cabeçalhos indentados.
+
+/*
+  X-Frame-Options: DENY
+  X-Content-Type-Options: nosniff
+  Referrer-Policy: strict-origin-when-cross-origin
+  Permissions-Policy: geolocation=(), microphone=(), camera=(), payment=()
+  Strict-Transport-Security: max-age=31536000; includeSubDomains
+  Cross-Origin-Opener-Policy: same-origin
+
+# Os nomes dos arquivos em /assets carregam o hash do conteúdo: quando o
+# conteúdo muda, o nome muda. Por isso podem ser guardados para sempre.
+/assets/*
+  Cache-Control: public, max-age=31536000, immutable
+
+# O acervo muda quando o autor publica. Cache curto para a alteração aparecer
+# rápido sem perder o ganho de velocidade.
+/conteudo/*
+  Cache-Control: public, max-age=300
+
+/marca/*
+  Cache-Control: public, max-age=86400
+
+# O HTML precisa ser sempre conferido, senão o visitante fica preso numa
+# versão antiga apontando para um /assets que já não existe — tela branca.
+/*.html
+  Cache-Control: public, max-age=0, must-revalidate
+
+# A demonstração do painel nunca entra em buscador. O robots.txt de lá já diz
+# isso; o cabeçalho é a segunda tranca, que vale mesmo se alguém linkar direto.
+/demonstracao/*
+  X-Robots-Tag: noindex, nofollow

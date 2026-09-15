@@ -269,7 +269,7 @@ for (const a of artigos) {
 /* ---------- sitemap ---------- */
 
 // Trocar quando o domínio definitivo existir; até lá o sitemap já sai pronto.
-const DOMINIO = 'https://enciclopediateologica.com.br';
+const DOMINIO = 'https://' + (process.env.DOMINIO || 'enciclopediateologica.com.br').replace(/^https?:///, '');
 const url = (caminho, data, prio) =>
   `  <url><loc>${DOMINIO}${caminho}</loc>${data ? `<lastmod>${data.slice(0, 10)}</lastmod>` : ''}<priority>${prio}</priority></url>`;
 

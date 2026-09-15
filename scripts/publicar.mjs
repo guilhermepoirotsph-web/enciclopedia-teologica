@@ -32,7 +32,10 @@ const cru = process.argv[2] || '/';
 const base = /^[A-Za-z]:[\\/]/.test(cru) || cru.includes('Program Files') ? '/' : cru;
 if (base !== cru) console.log(`aviso: argumento "${cru}" veio mexido pelo shell; usando base "/"`);
 
-const dominio = process.argv[3] || '';
+// O domínio pode vir do argumento OU da variável DOMINIO — é assim que o
+// Cloudflare Pages liga o site no buscador no dia do domínio, mexendo só numa
+// caixa do painel dele, sem tocar no código.
+const dominio = (process.argv[3] || process.env.DOMINIO || '').trim();
 
 /* ---------------------------------------------------------------- build */
 
