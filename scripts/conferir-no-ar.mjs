@@ -8,7 +8,17 @@
  *
  *   node scripts/conferir-no-ar.mjs [url]
  */
-const BASE = (process.argv[2] || 'https://guilhermepoirotsph-web.github.io/enciclopedia-teologica/').replace(/\/?$/, '/');
+/*
+ * O PADRÃO É O CLOUDFLARE desde 15/09/2026 — era o GitHub Pages, e isso fazia
+ * o script MENTIR. Rodar `node scripts/conferir-no-ar.mjs` sem argumento (ou
+ * `npm run conferir`) dizia "Tudo conferido" depois de conferir o endereço
+ * ANTIGO, que hoje serve um pacote anterior aos hiperlinks e à rádio. Onze
+ * linhas OK sobre o site errado é pior que nenhuma conferência: passa a
+ * sensação de prova sem a prova.
+ * `scripts/subir.mjs` sempre passou a URL certa por argumento, então a
+ * publicação nunca foi afetada — só a conferência avulsa.
+ */
+const BASE = (process.argv[2] || 'https://enciclopedia-teologica.pages.dev/').replace(/\/?$/, '/');
 
 const esperar = (ms) => new Promise((r) => setTimeout(r, ms));
 
