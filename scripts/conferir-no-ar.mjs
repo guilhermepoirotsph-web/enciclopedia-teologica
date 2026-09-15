@@ -46,11 +46,14 @@ const anota = (nome, ok, detalhe = '') => checagens.push({ nome, ok, detalhe });
 
 anota('home responde', home.status === 200, `HTTP ${home.status}`);
 anota('título no HTML', /Enciclopédia Teológica/.test(home.corpo));
-anota('caminho do bundle com a base certa', Boolean(bundle && bundle.includes('/enciclopedia-teologica/')), bundle || 'não achei');
+// A base esperada sai da propria URL conferida, senao este teste so valeria
+// para o GitHub Pages e passaria a mentir depois da mudanca de hospedagem.
+const baseEsperada = new URL(BASE).pathname;
+anota('caminho do bundle com a base certa', Boolean(bundle && bundle.startsWith(baseEsperada + 'assets/')), bundle || 'nao achei');
 
 for (const [nome, caminho] of [
-  ['bundle carrega', bundle?.replace(/^\/enciclopedia-teologica\//, '')],
-  ['css carrega', css?.replace(/^\/enciclopedia-teologica\//, '')],
+  ['bundle carrega', bundle?.slice(baseEsperada.length)],
+  ['css carrega', css?.slice(baseEsperada.length)],
   ['acervo publicado', 'conteudo/indice.json'],
   ['selo da marca', 'marca/selo.svg'],
   ['imagem social', 'marca/og.png'],
@@ -64,9 +67,11 @@ for (const [nome, caminho] of [
   anota(nome, r.status === 200, `HTTP ${r.status}`);
 }
 
-// rota funda: o Pages devolve 404.html, que é o app inteiro
+// Rota funda tem que ser uma PÁGINA DE VERDADE (200), não o 404.html servido
+// como consolo: para o visitante dá na mesma, para o buscador é a diferença
+// entre um estudo indexável e uma página inexistente.
 const funda = await pegar('artigo/fe');
-anota('rota funda cai no app (404.html)', /Enciclopédia Teológica/.test(funda.corpo), `HTTP ${funda.status}`);
+anota('rota funda abre com pagina propria', /Enciclopédia Teológica/.test(funda.corpo) && funda.status === 200, `HTTP ${funda.status}`);
 
 // quantos estudos o site publicado carrega
 const indice = await pegar('conteudo/indice.json');

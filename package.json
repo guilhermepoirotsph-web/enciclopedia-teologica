@@ -9,7 +9,8 @@
     "preview": "vite preview",
     "conteudo": "node scripts/gerar-conteudo.mjs",
     "arte": "node scripts/gerar-arte.mjs",
-    "build:pages": "node scripts/publicar.mjs /"
+    "subir": "node scripts/subir.mjs",
+    "conferir": "node scripts/conferir-no-ar.mjs"
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.45.4",
@@ -31,6 +32,7 @@
     "@types/three": "^0.169.0",
     "@vitejs/plugin-react": "^4.3.2",
     "typescript": "^5.6.2",
-    "vite": "^5.4.8"
+    "vite": "^5.4.8",
+    "wrangler": "^4.131.2"
   }
 }
