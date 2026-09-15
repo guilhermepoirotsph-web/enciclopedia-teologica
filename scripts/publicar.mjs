@@ -165,7 +165,15 @@ execFileSync(process.execPath, [join(RAIZ, 'node_modules', 'vite', 'bin', 'vite.
   stdio: 'ignore',
   env: { ...process.env, BASE: baseDemo, VITE_PREVIA: '1' },
 });
-copyFileSync(join(DIST, 'demonstracao', 'index.html'), join(DIST, 'demonstracao', '404.html'));
+// A demonstração sai do buscador por TRÊS caminhos: a meta aqui, o robots.txt
+// da pasta e o cabeçalho X-Robots-Tag do `_headers`. Parece exagero e não é:
+// cada um falha numa situação diferente, e uma cópia do painel indexada ao lado
+// do site de verdade confundiria qualquer visitante.
+const demoHtml = readFileSync(join(DIST, 'demonstracao', 'index.html'), 'utf8')
+  .replace(/<link\s+rel="canonical"[^>]*>/, '')
+  .replace(/(<meta\s+name="robots"\s+content=")[^"]*(")/, '$1noindex, nofollow$2');
+writeFileSync(join(DIST, 'demonstracao', 'index.html'), demoHtml, 'utf8');
+writeFileSync(join(DIST, 'demonstracao', '404.html'), demoHtml, 'utf8');
 writeFileSync(join(DIST, 'demonstracao', 'robots.txt'), 'User-agent: *\nDisallow: /\n', 'utf8');
 
 // A demonstração NÃO pode levar chave de banco: é o único build que qualquer
