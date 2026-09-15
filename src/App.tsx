@@ -3,6 +3,7 @@ import { Navigate, Route, Routes, useLocation } from 'react-router-dom';
 import Cabecalho from './componentes/Cabecalho';
 import Rodape from './componentes/Rodape';
 import Barreira from './componentes/Barreira';
+import ControleRadio from './componentes/ControleRadio';
 import Inicio from './paginas/Inicio';
 import Biblioteca from './paginas/Biblioteca';
 import Artigo from './paginas/Artigo';
@@ -90,6 +91,9 @@ export default function App() {
         </Barreira>
       </main>
       {!noPainel && <Rodape />}
+      {/* Fora das rotas de proposito: assim a trilha NAO recomeca a cada
+          navegacao — que e o que faz dela uma radio e nao um efeito sonoro. */}
+      {!noPainel && <ControleRadio />}
     </>
   );
 }

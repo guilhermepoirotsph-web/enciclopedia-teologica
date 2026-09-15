@@ -1,0 +1,236 @@
+/* =========================================================================
+   Links dentro do estudo e o controle da trilha sonora.
+   ========================================================================= */
+
+/* ------------------------------------------------------ links no artigo */
+
+/* Link para outro estudo da própria enciclopédia: sublinhado dourado discreto,
+   porque é navegação interna e acontece muito. */
+.leitura a.link-interno {
+  color: var(--ouro-luz);
+  border-bottom: 1px solid var(--ouro-sombra);
+  text-decoration: none;
+  transition: border-color var(--transicao), color var(--transicao);
+}
+.leitura a.link-interno:hover {
+  color: var(--marfim);
+  border-bottom-color: var(--ouro-luz);
+}
+
+/* Link que sai do site ganha a setinha — o leitor merece saber que vai sair
+   do estudo antes de clicar, não depois. */
+.leitura a.link-externo {
+  color: var(--ouro-luz);
+  border-bottom: 1px solid var(--ouro-sombra);
+  text-decoration: none;
+}
+.leitura a.link-externo::after {
+  content: '↗';
+  font-size: 0.78em;
+  margin-left: 0.18em;
+  vertical-align: super;
+  opacity: 0.75;
+}
+.leitura a.link-externo:hover {
+  color: var(--marfim);
+}
+
+@media print {
+  /* No papel o endereço tem que aparecer: um link impresso sem URL é só uma
+     palavra sublinhada. */
+  .leitura a.link-externo::after {
+    content: ' (' attr(href) ')';
+    font-size: 0.8em;
+    vertical-align: baseline;
+    word-break: break-all;
+  }
+}
+
+/* ------------------------------------------------------------- a rádio */
+
+.radio {
+  position: fixed;
+  right: clamp(0.8rem, 2vw, 1.6rem);
+  bottom: clamp(0.8rem, 2vw, 1.6rem);
+  z-index: 50;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 0.5rem;
+}
+
+.radio__botoes {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.3rem;
+  border: 1px solid var(--linha);
+  border-radius: 999px;
+  background: rgba(5, 7, 11, 0.86);
+  backdrop-filter: blur(10px);
+}
+
+.radio__som,
+.radio__abrir {
+  display: grid;
+  place-items: center;
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  color: var(--fosco);
+  transition: color var(--transicao), background-color var(--transicao);
+}
+.radio__som:hover,
+.radio__abrir:hover {
+  color: var(--marfim);
+  background: rgba(255, 255, 255, 0.05);
+}
+.radio__som--ligado {
+  color: var(--ouro-luz);
+  background: rgba(201, 162, 74, 0.14);
+}
+.radio__abrir {
+  width: 30px;
+  height: 30px;
+  font-size: 1rem;
+  line-height: 1;
+}
+
+/* As barrinhas só se mexem quando há som — o ícone conta a verdade. */
+.onda rect {
+  transform-origin: center;
+}
+.onda--viva rect:nth-child(1) {
+  animation: pulsar 1.5s ease-in-out infinite;
+}
+.onda--viva rect:nth-child(2) {
+  animation: pulsar 1.1s ease-in-out infinite 0.2s;
+}
+.onda--viva rect:nth-child(3) {
+  animation: pulsar 1.8s ease-in-out infinite 0.4s;
+}
+@keyframes pulsar {
+  50% {
+    transform: scaleY(0.45);
+  }
+}
+
+.radio__painel {
+  width: 220px;
+  padding: 0.9rem 1rem;
+  border: 1px solid var(--linha);
+  border-radius: 4px;
+  background: rgba(5, 7, 11, 0.94);
+  backdrop-filter: blur(10px);
+}
+.radio__nome {
+  margin: 0 0 0.6rem;
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--ouro);
+}
+.radio__volume input {
+  width: 100%;
+  accent-color: var(--ouro);
+}
+.radio__erro {
+  margin: 0.6rem 0 0;
+  font-size: 0.74rem;
+  color: #f0a48c;
+}
+
+@media (max-width: 720px) {
+  .radio {
+    right: 0.7rem;
+    bottom: 0.7rem;
+  }
+  .radio__painel {
+    width: 180px;
+  }
+}
+
+/* ---------------------------------------------- barra do editor (painel) */
+
+.barra-texto {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.3rem;
+  margin-bottom: 0.6rem;
+}
+.barra-texto button {
+  padding: 0.4rem 0.7rem;
+  min-height: 34px;
+  border: 1px solid var(--linha);
+  border-radius: 2px;
+  font-size: 0.76rem;
+  color: var(--fosco);
+  background: var(--abismo);
+  transition: border-color var(--transicao), color var(--transicao);
+}
+.barra-texto button:hover {
+  border-color: var(--ouro-sombra);
+  color: var(--marfim);
+}
+.barra-texto__sep {
+  width: 1px;
+  align-self: stretch;
+  background: var(--linha-suave);
+  margin: 0 0.25rem;
+}
+
+/* --------------------------------------------- escolher estudo para linkar */
+
+.escolher {
+  position: fixed;
+  inset: 0;
+  z-index: 80;
+  display: none;
+  padding: clamp(1rem, 5vh, 4rem) 1rem;
+  background: rgba(5, 7, 11, 0.86);
+  backdrop-filter: blur(6px);
+  overflow-y: auto;
+}
+/* A regra de esconder vem com !important e ANTES da de mostrar, porque
+   `display` numa classe vence o atributo `hidden` do HTML por especificidade —
+   já deixou modal aberto em produção neste projeto. */
+.escolher[hidden] {
+  display: none !important;
+}
+.escolher--aberto {
+  display: block;
+}
+.escolher__caixa {
+  max-width: 680px;
+  margin: auto;
+  padding: 1.4rem;
+  border: 1px solid var(--linha);
+  border-radius: 4px;
+  background: var(--noite);
+}
+.escolher__lista {
+  max-height: 46vh;
+  overflow-y: auto;
+  margin-top: 0.8rem;
+  border: 1px solid var(--linha-suave);
+}
+.escolher__item {
+  display: block;
+  width: 100%;
+  text-align: left;
+  padding: 0.7rem 0.9rem;
+  border-bottom: 1px solid var(--linha-suave);
+  font-size: 0.9rem;
+  color: var(--texto);
+}
+.escolher__item:hover {
+  background: var(--pedra);
+  color: var(--marfim);
+}
+.escolher__item small {
+  display: block;
+  color: var(--fosco);
+  font-size: 0.74rem;
+  margin-top: 0.15rem;
+}

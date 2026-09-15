@@ -47,6 +47,54 @@ export default function Ajuda() {
           </li>
         </ul>
 
+        <h2>Colocar link no meio do texto</h2>
+        <p>
+          Não precisa decorar nada: selecione a palavra que vai virar link e use a barra de botões
+          em cima do campo de escrever.
+        </p>
+        <ul>
+          <li>
+            <strong>🔗 Link</strong> — para um endereço de fora (uma notícia, um artigo de outro
+            site, a página do livro). Ele pergunta o endereço e monta o link. Esses links abrem em
+            uma <em>aba nova</em>, para o leitor não perder o estudo que estava lendo.
+          </li>
+          <li>
+            <strong>✦ Ligar a outro estudo</strong> — para apontar para outro texto seu. Abre a
+            lista dos seus estudos com busca: você escolhe <em>pelo título</em> e o endereço é
+            montado sozinho. É o jeito certo de fazer, porque assim o link nunca sai errado.
+          </li>
+        </ul>
+        <blockquote className="versiculo">
+          Amarrar os estudos uns nos outros é o que transforma 97 textos soltos numa enciclopédia de
+          verdade. Quando falar de fé num artigo de escatologia, ligue para o estudo sobre a Fé — o
+          leitor segue a linha e fica.
+        </blockquote>
+        <p>
+          Se preferir escrever na mão, o formato é{' '}
+          <code>[o texto que aparece](o endereço)</code>.
+        </p>
+
+        <h2>A trilha sonora (a “rádio”)</h2>
+        <p>
+          Em <strong>Configurações → Trilha sonora do site</strong> você escolhe um fundo musical
+          para quem estiver lendo. Há três trilhas prontas — <em>Nave</em>, <em>Vitral</em> e{' '}
+          <em>Salmo</em> — e um botão <strong>Ouvir</strong> para experimentar antes de salvar. Se
+          você tiver uma gravação sua, escolha “Gravação própria” e cole o endereço do áudio.
+        </p>
+        <ul>
+          <li>
+            A música <strong>nunca começa sozinha</strong>. O visitante vê um botão pequeno no canto
+            da tela e decide se quer ouvir. É o que os navegadores permitem, e é o certo a fazer com
+            quem abriu o site no meio do trabalho.
+          </li>
+          <li>
+            O volume que você escolhe é só o <em>inicial</em>; quem estiver lendo pode mudar.
+          </li>
+          <li>
+            Escolhendo <strong>“Sem trilha”</strong>, o botão some do site e ninguém ouve nada.
+          </li>
+        </ul>
+
         <h2>Estudo aberto x estudo do Núcleo</h2>
         <p>
           Toda linha da lista de <strong>Estudos</strong> tem duas chavinhas: <strong>No ar</strong> e{' '}

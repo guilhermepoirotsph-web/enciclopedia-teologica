@@ -211,6 +211,24 @@ export async function listarObras(): Promise<Obra[]> {
   return OBRAS_BASE.map((o) => ({ ...o, ...(r.obras[o.slug] ?? {}) }));
 }
 
+/* ------------------------------------------------------------ configuração */
+
+/**
+ * Configuração pública do site (contatos, Pix, trilha sonora).
+ *
+ * Com banco, vem da view `config_publica` — só as chaves marcadas como
+ * públicas. Sem banco, vem do rascunho do painel, para o modo prévia refletir
+ * o que o autor acabou de mexer.
+ */
+export async function lerConfigPublica(): Promise<Record<string, string>> {
+  if (temBanco) {
+    const { data, error } = await supabase!.from('config_publica').select('chave,valor');
+    if (error || !data) return {};
+    return Object.fromEntries((data as { chave: string; valor: string }[]).map((c) => [c.chave, c.valor]));
+  }
+  return lerRascunho().config ?? {};
+}
+
 /* ------------------------------------------------------- envio de formulário */
 
 export async function enviarMensagem(m: {

@@ -1,6 +1,7 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import Texto from '../../componentes/Texto';
+import BarraTexto from './BarraTexto';
 import { criarArtigo, painelArtigo, painelEixos, salvarArtigo, slugificar } from '../../dados/painel';
 import type { ArtigoCompleto, Eixo } from '../../dados/tipos';
 
@@ -22,6 +23,7 @@ export default function Editor({ novo = false }: { novo?: boolean }) {
   const [aviso, setAviso] = useState<{ tom: 'ok' | 'erro' | 'aviso'; texto: string } | null>(null);
   const [vendo, setVendo] = useState<'escrever' | 'previa'>('escrever');
   const [salvando, setSalvando] = useState(false);
+  const area = useRef<HTMLTextAreaElement>(null);
 
   useEffect(() => {
     painelEixos().then(setEixos).catch(() => {});
@@ -189,7 +191,14 @@ export default function Editor({ novo = false }: { novo?: boolean }) {
 
           {vendo === 'escrever' ? (
             <>
+              <BarraTexto
+                area={area}
+                valor={a.md ?? ''}
+                aoMudar={(md) => setA({ ...a, md })}
+                slugAtual={novo ? undefined : slug}
+              />
               <textarea
+                ref={area}
                 className="editor__area"
                 value={a.md ?? ''}
                 onChange={(e) => setA({ ...a, md: e.target.value })}

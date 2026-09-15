@@ -37,6 +37,35 @@
       rel="stylesheet"
     />
 
+    <style>
+      /* A abertura fica em <style> no próprio HTML, e não na folha externa,
+         para pintar já no primeiro byte — sem esperar CSS, fonte nem JS. */
+      .abertura {
+        position: fixed;
+        inset: 0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 1rem;
+        background: #05070b;
+        animation: aberturaSurge 0.5s ease-out both;
+      }
+      .abertura p {
+        margin: 0;
+        font-family: Georgia, 'Times New Roman', serif;
+        font-size: 1rem;
+        letter-spacing: 0.08em;
+        color: #f4eee2;
+        opacity: 0.75;
+      }
+      @keyframes aberturaSurge {
+        from {
+          opacity: 0;
+        }
+      }
+    </style>
+
     <script type="application/ld+json">
       {
         "@context": "https://schema.org",
@@ -53,6 +82,25 @@
   </head>
   <body>
     <div id="raiz">
+      <!-- Abertura de marca, pintada pelo HTML antes de qualquer JavaScript.
+           O React a substitui ao montar. Existe porque a aplicação espera a
+           configuração do autor (WhatsApp, Pix, trilha) antes da primeira
+           renderização: sem isto, essa fração de segundo seria uma tela preta,
+           que é exatamente o sintoma de site quebrado. -->
+      <div class="abertura" aria-hidden="true">
+        <svg viewBox="0 0 72 72" width="64" height="64">
+          <circle cx="36" cy="36" r="34" fill="none" stroke="#C9A24A" stroke-width="1.5" />
+          <path d="M23 51 L23 32 Q23 17.5 36 12.5 Q49 17.5 49 32 L49 51" fill="none" stroke="#C9A24A" stroke-width="1.6" stroke-linecap="round" />
+          <path d="M34.9 20 H37.1 V47 H34.9 Z" fill="#E9CE8B" />
+          <path d="M28.4 28.2 H43.6 V30.1 H28.4 Z" fill="#E9CE8B" />
+          <g fill="none" stroke="#C9A24A" stroke-width="1.5" stroke-linejoin="round">
+            <path d="M36 48.6 C32 46.1 27.6 45.3 23.6 45.9 L23.6 52.6 C27.6 52 32 52.8 36 55.2 Z" />
+            <path d="M36 48.6 C40 46.1 44.4 45.3 48.4 45.9 L48.4 52.6 C44.4 52 40 52.8 36 55.2 Z" />
+          </g>
+        </svg>
+        <p>Enciclopédia Teológica</p>
+      </div>
+
       <!-- Núcleo visível antes do JS montar: se o bundle falhar, o visitante
            ainda encontra o nome, a promessa e o caminho para a biblioteca. -->
       <noscript>

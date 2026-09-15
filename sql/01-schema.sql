@@ -413,7 +413,12 @@ insert into public.config (chave, valor, publica) values
   ('pix_chave', '', true),
   ('pix_nome', '', true),
   ('pix_cidade', '', true),
-  ('infinitepay', '', true)
+  ('infinitepay', '', true),
+  -- trilha sonora: estacao gerada no navegador, sem arquivo e sem direito autoral
+  ('radio_estacao', 'nave', true),
+  ('radio_mostrar', 'sim', true),
+  ('radio_volume', '0.35', true),
+  ('radio_url', '', true)
 on conflict (chave) do nothing;
 
 -- -------------------------------------------------------- obras iniciais
