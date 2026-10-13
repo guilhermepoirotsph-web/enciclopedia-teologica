@@ -24,8 +24,8 @@ import { createClient, type SupabaseClient } from '@supabase/supabase-js';
  */
 const previa = import.meta.env?.VITE_PREVIA === '1';
 
-export const SUPABASE_URL = previa ? '' : 'https://xssklzwhkxmavtcjorre.supabase.co';
-export const SUPABASE_CHAVE_PUBLICAVEL = previa ? '' : 'sb_publishable_33CrvSMfufyae8yPo317RQ_1CeKFJ8r';
+export const SUPABASE_URL = previa ? '' : 'https://qcrdlmkguhxneagpcybb.supabase.co';
+export const SUPABASE_CHAVE_PUBLICAVEL = previa ? '' : 'sb_publishable_ywmtb3Xr4Ucj9Jf2NVrvxg_RvRFI97Z';
 
 export const temBanco = Boolean(SUPABASE_URL && SUPABASE_CHAVE_PUBLICAVEL);
 

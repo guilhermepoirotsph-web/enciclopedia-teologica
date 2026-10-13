@@ -32,7 +32,7 @@ Abre em <http://127.0.0.1:5178>.
 ## Situação
 
 ### Pronto e provado
-- **Banco Supabase ligado e semeado** — projeto `xssklzwhkxmavtcjorre`, 97 estudos e
+- **Banco Supabase ligado e semeado** — projeto `qcrdlmkguhxneagpcybb`, 97 estudos e
   32 eixos. O texto de cada estudo foi comparado byte a byte com o original:
   **97 de 97 idênticos**.
 - RLS provada de fora: as views públicas respondem, as tabelas cruas devolvem
@@ -92,7 +92,7 @@ A `service_role` nunca entrou no projeto, e o script recusa publicar se entrar.
 
 ## O banco
 
-Projeto dedicado no Supabase (`xssklzwhkxmavtcjorre`), criado em 12/09/2026.
+Projeto dedicado no Supabase (`qcrdlmkguhxneagpcybb`, conta automacoesgd@gmail.com, São Paulo), criado em 13/10/2026 — substitui o `xssklzwhkxmavtcjorre`, que pausou numa conta não identificada.
 URL e chave ficam **hardcodadas** em `src/dados/supabase.ts` — não em `VITE_*` —
 porque plataforma que gerencia deploy costuma reescrever variável de ambiente e
 apontar o site para outro banco sem avisar.

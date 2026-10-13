@@ -149,7 +149,7 @@ continua funcionando igual.
 | O quê | Onde |
 | --- | --- |
 | Hospedagem | Cloudflare Pages, projeto `enciclopedia-teologica` |
-| Banco de dados | Supabase, projeto `xssklzwhkxmavtcjorre` |
+| Banco de dados | Supabase, projeto `qcrdlmkguhxneagpcybb` (conta automacoesgd@gmail.com) |
 | Código | GitHub, `guilhermepoirotsph-web/enciclopedia-teologica` |
 | Livro | Hotmart (link no painel, em Configurações) |
 | Publicar | `node scripts/subir.mjs [dominio]` |
