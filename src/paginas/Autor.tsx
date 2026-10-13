@@ -44,7 +44,8 @@ export default function Autor() {
             <h2>Biografia</h2>
             <p>
               Eleno Gutemberg Silva é pastor evangélico, professor de ensino bíblico, educador
-              cristão e escritor, com formação básica em Teologia. Casado, dedica-se ao estudo das
+              cristão e escritor, com formação básica em Teologia. Casado com Renata Gutemberg e pai
+              de duas filhas, dedica-se ao estudo das
               Escrituras e à produção de conteúdos que unem fundamento bíblico, clareza didática e
               aplicação prática para a vida cristã.
             </p>
@@ -91,6 +92,47 @@ export default function Autor() {
               não às teses apresentadas. Correção bem fundamentada é bem-vinda e já mudou texto
               publicado.
             </p>
+          </Aparece>
+        </div>
+      </section>
+
+      <section className="secao">
+        <div className="miolo familia">
+          <Aparece como="div" className="leitura">
+            <p className="rotulo">Família e responsabilidade</p>
+            <h2>Antes do púlpito, a casa</h2>
+            <p>
+              Eleno é casado com Renata Gutemberg e pai de duas filhas. É em casa que o ensino dele
+              começa: a fé que aparece nos estudos é a mesma que se pratica à mesa, na rotina e nas
+              decisões de cada dia.
+            </p>
+            <p>
+              Como pastor, ele entende o ministério como responsabilidade — com a família, com a
+              igreja e com quem está à margem. A capelania no sistema prisional nasce desse mesmo
+              compromisso: levar a Palavra com seriedade a quem mais precisa ouvir que ainda há
+              caminho de volta.
+            </p>
+            <p>
+              É por isso que os temas de família, casamento e criação de filhos ocupam um lugar
+              próprio neste acervo. Não são teoria: são o chão onde a doutrina é posta à prova.
+            </p>
+            <Link to="/eixo/familia" className="btn btn--linha" style={{ marginTop: '1rem' }}>
+              Estudos sobre família
+            </Link>
+          </Aparece>
+
+          <Aparece className="familia__foto" atraso={90}>
+            <picture>
+              <source srcSet="/marca/eleno-familia.webp" type="image/webp" />
+              <img
+                src="/marca/eleno-familia.jpg"
+                alt="Eleno Gutemberg com a esposa, Renata, e as duas filhas"
+                width={720}
+                height={900}
+                loading="lazy"
+                decoding="async"
+              />
+            </picture>
           </Aparece>
         </div>
       </section>
