@@ -398,8 +398,8 @@ function OAutor() {
           </Aparece>
           <Aparece como="div" className="olho" atraso={90}>
             <p>
-              Professor de ensino bíblico, educador cristão e escritor, com formação básica em
-              Teologia. Escreve sobre teologia bíblica, história antiga e o encontro entre fé e
+              Pastor evangélico, capelão no sistema prisional, professor de ensino bíblico e
+              escritor, com formação básica em Teologia. Escreve sobre teologia bíblica, história antiga e o encontro entre fé e
               sociedade — com fundamento bíblico, clareza didática e aplicação prática.
             </p>
             <p>

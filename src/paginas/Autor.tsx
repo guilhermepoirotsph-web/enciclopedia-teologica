@@ -24,8 +24,9 @@ export default function Autor() {
           <p className="rotulo">Quem escreve</p>
           <h1>Eleno Gutemberg Silva</h1>
           <p className="olho">
-            Professor de ensino bíblico, educador cristão e escritor, com formação básica em
-            Teologia. Mantém esta enciclopédia desde abril de 2026 e é autor de{' '}
+            Pastor evangélico, capelão evangélico no sistema prisional, professor de ensino
+            bíblico e escritor, com formação básica em Teologia. Mantém esta enciclopédia desde
+            abril de 2026 e é autor de{' '}
             <em>Na Terra dos Viventes — Espírito, Alma e Corpo</em>.
           </p>
         </div>
@@ -45,10 +46,15 @@ export default function Autor() {
           <Aparece como="div" className="leitura" atraso={90}>
             <h2>Biografia</h2>
             <p>
-              Eleno Gutemberg Silva é professor de ensino bíblico, educador cristão e escritor, com
-              formação básica em Teologia. Casado, dedica-se ao estudo das Escrituras e à produção de
-              conteúdos que unem fundamento bíblico, clareza didática e aplicação prática para a
-              vida cristã.
+              Eleno Gutemberg Silva é pastor evangélico, professor de ensino bíblico, educador
+              cristão e escritor, com formação básica em Teologia. Casado, dedica-se ao estudo das
+              Escrituras e à produção de conteúdos que unem fundamento bíblico, clareza didática e
+              aplicação prática para a vida cristã.
+            </p>
+            <p>
+              Atua também como capelão evangélico no sistema prisional — um ministério que leva a
+              Palavra a quem está privado de liberdade e que dá peso concreto aos temas que atravessam
+              este acervo: culpa, arrependimento, redenção e dignidade humana à luz das Escrituras.
             </p>
             <p>
               O trabalho dele é voltado à formação espiritual de leitores que desejam compreender a

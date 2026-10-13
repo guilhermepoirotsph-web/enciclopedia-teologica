@@ -66,7 +66,8 @@ const PADRAO: Config = {
 
   // Link real do livro na Hotmart, conferido na página do Notion em 12/09/2026.
   hotmart: 'https://go.hotmart.com/I103629686U',
-  pix: { chave: '', nome: '', cidade: '' },
+  // Chave Pix do autor (Mercado Pago), informada pelo Guilherme em 13/10/2026.
+  pix: { chave: 'mkpgutemberg@gmail.com', nome: 'Eleno Gutemberg Silva', cidade: '' },
   infinitepay: '',
   apoioSugerido: 10,
 
