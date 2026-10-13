@@ -102,7 +102,9 @@ Para recriar do zero, no SQL Editor e nesta ordem:
 1. `sql/01-schema.sql`
 2. as fatias de `sql/fatias/` (geradas por `node scripts/fatiar-seed.mjs`) — o seed
    inteiro tem 730 KB e trava o editor
-3. `sql/03-promover.sql`, trocando o e-mail
+3. `sql/04-datas.sql` (devolve as datas reais; o gatilho de carimbo fica desligado durante)
+4. `sql/05-backup.sql` (cofre de backups + pg_cron diário às 04h, guarda 30; só admin lê)
+5. `sql/03-promover.sql`, trocando o e-mail
 
 Depois, sempre: `node scripts/conferir-banco.mjs`.
 

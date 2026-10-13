@@ -26,13 +26,19 @@ const alvos = [
   { nome: 'artigos (crua)', caminho: '/rest/v1/artigos?select=corpo&limit=1', espera: 'vazio-ou-401', obs: 'NÃO pode devolver corpo' },
   { nome: 'perfis (crua)', caminho: '/rest/v1/perfis?select=email&limit=1', espera: 'vazio-ou-401', obs: 'NÃO pode listar gente' },
   { nome: 'mensagens (crua)', caminho: '/rest/v1/mensagens?select=email&limit=1', espera: 'vazio-ou-401', obs: 'NÃO pode ler a caixa' },
+  { nome: 'backups (crua)', caminho: '/rest/v1/backups?select=arquivo&limit=1', espera: 'vazio-ou-401', obs: 'NÃO pode baixar backup' },
+  { nome: 'fn_salvar_backup', caminho: '/rest/v1/rpc/fn_salvar_backup', metodo: 'POST', espera: 'vazio-ou-401', obs: 'NÃO pode disparar backup' },
 ];
 
 let falhas = 0;
 
 for (const a of alvos) {
   try {
-    const r = await fetch(base + a.caminho, { headers: cabecalhos });
+    const r = await fetch(base + a.caminho, {
+      method: a.metodo || 'GET',
+      headers: { ...cabecalhos, ...(a.metodo === 'POST' ? { 'Content-Type': 'application/json' } : {}) },
+      ...(a.metodo === 'POST' ? { body: '{}' } : {}),
+    });
     const corpo = await r.text();
     const vazio = corpo.trim() === '[]';
 
