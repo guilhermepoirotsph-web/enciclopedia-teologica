@@ -41,7 +41,7 @@ begin
     new.id,
     coalesce(new.raw_user_meta_data ->> 'nome', ''),
     coalesce(new.email, ''),
-    coalesce(convite, 'leitor')
+    coalesce(convite, 'leitor')::public.papel_usuario
   )
   on conflict (id) do nothing;
 
@@ -72,6 +72,16 @@ insert into public.convites_equipe (email, papel)
 values ('guilhermepoirotsph@gmail.com', 'admin')
 on conflict (email) do update set papel = 'admin', usado_em = null;
 
-select p.email, p.papel, p.ativo from public.perfis p where p.papel in ('admin','editor')
+-- Se a conta dele já existe (criada antes deste script), promove direto.
+update public.perfis set papel = 'admin', ativo = true
+ where lower(email) = 'guilhermepoirotsph@gmail.com';
+update public.convites_equipe set usado_em = now()
+ where email = 'guilhermepoirotsph@gmail.com'
+   and exists (select 1 from public.perfis where lower(email) = 'guilhermepoirotsph@gmail.com');
+
+-- WhatsApp do autor.
+update public.config set valor = '5512981408270' where chave = 'whatsapp';
+
+select p.email, p.papel::text, p.ativo from public.perfis p where p.papel in ('admin','editor')
 union all
 select c.email || ' (convite)', c.papel, c.usado_em is null from public.convites_equipe c;
