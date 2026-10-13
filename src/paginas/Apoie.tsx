@@ -124,7 +124,7 @@ export default function Apoie() {
               <div className="apoio__opcao">
                 <h3>Comprar o livro</h3>
                 <p>
-                  <em>Na Terra dos Viventes — Espírito, Alma</em> está publicado na Hotmart. É apoio e
+                  <em>Na Terra dos Viventes — Espírito, Alma e Corpo</em> está publicado na Hotmart. É apoio e
                   leitura no mesmo gesto.
                 </p>
                 <a href={SITE.hotmart} target="_blank" rel="noopener noreferrer" className="btn btn--linha">

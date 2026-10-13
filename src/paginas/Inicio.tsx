@@ -398,9 +398,9 @@ function OAutor() {
           </Aparece>
           <Aparece como="div" className="olho" atraso={90}>
             <p>
-              Pesquisador e escritor. Escreve sobre teologia bíblica, história antiga e o encontro
-              entre fé e sociedade — e escreve há tempo suficiente para voltar atrás e corrigir o
-              próprio texto quando a pesquisa pede.
+              Professor de ensino bíblico, educador cristão e escritor, com formação básica em
+              Teologia. Escreve sobre teologia bíblica, história antiga e o encontro entre fé e
+              sociedade — com fundamento bíblico, clareza didática e aplicação prática.
             </p>
             <p>
               É autor de <em>Na Terra dos Viventes — Espírito, Alma e Corpo</em> e mantém este acervo aberto
@@ -439,8 +439,9 @@ function OLivro() {
             O que morre, o que permanece e onde o ser humano de fato habita
           </Aparece>
           <Aparece como="p" className="olho" atraso={90}>
-            O livro em que o autor destrincha a constituição do ser — espírito, alma e corpo — e
-            enfrenta a pergunta que quase toda igreja adia: o que exatamente atravessa a morte.
+            A origem, a natureza e o destino do ser humano à luz das Escrituras: a diferença entre
+            espírito, alma e corpo, a queda, a redenção em Cristo, a morte e a imortalidade.
+            eBook por R$ 25,00, com garantia de 7 dias.
           </Aparece>
           <Aparece className="linha" atraso={150} style={{ marginTop: '1.8rem' }}>
             <a href={SITE.hotmart} target="_blank" rel="noopener noreferrer" className="btn btn--ouro">

@@ -107,7 +107,7 @@ const FIXAS = [
   ['/eixos', 'Eixos temáticos — Enciclopédia Teológica e Antropológica', 'O mapa do acervo: cada estudo entra num eixo, e cada eixo responde a uma pergunta real de quem estuda a Bíblia.'],
   ['/nucleo', 'Núcleo de Estudos — Enciclopédia Teológica e Antropológica', 'Material aprofundado em ordem de leitura, aparato de apoio e acesso direto ao autor. A biblioteca continua aberta.'],
   ['/livro', 'Na Terra dos Viventes — Espírito, Alma e Corpo | Eleno Gutemberg', 'O livro em que Eleno Gutemberg enfrenta a constituição do ser humano: o que somos, o que morre e o que atravessa.'],
-  ['/autor', 'Eleno Gutemberg — Enciclopédia Teológica e Antropológica', 'Pesquisador e escritor. Mantém este acervo com revisão contínua e é autor de Na Terra dos Viventes.'],
+  ['/autor', 'Eleno Gutemberg — Enciclopédia Teológica e Antropológica', 'Professor de ensino bíblico, educador cristão e escritor. Mantém este acervo e é autor de Na Terra dos Viventes — Espírito, Alma e Corpo.'],
   ['/apoie', 'Apoie a obra — Enciclopédia Teológica e Antropológica', 'O acervo é aberto e continua aberto. Quem quiser sustentar a pesquisa ajuda por aqui.'],
   ['/contato', 'Contato — Enciclopédia Teológica e Antropológica', 'Dúvida sobre um estudo, correção fundamentada, convite ou imprensa.'],
   ['/esclarecimento', 'Nota de esclarecimento — Enciclopédia Teológica e Antropológica', 'A posição editorial deste acervo, na íntegra: liberdade de crença, liberdade acadêmica e abertura à correção.'],

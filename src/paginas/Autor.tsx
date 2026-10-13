@@ -22,10 +22,11 @@ export default function Autor() {
       <header className="cabeca">
         <div className="miolo">
           <p className="rotulo">Quem escreve</p>
-          <h1>Eleno Gutemberg</h1>
+          <h1>Eleno Gutemberg Silva</h1>
           <p className="olho">
-            Pesquisador e escritor. Mantém esta enciclopédia desde abril de 2026, com revisão
-            contínua de cada estudo — e é autor de <em>Na Terra dos Viventes — Espírito, Alma e Corpo</em>.
+            Professor de ensino bíblico, educador cristão e escritor, com formação básica em
+            Teologia. Mantém esta enciclopédia desde abril de 2026 e é autor de{' '}
+            <em>Na Terra dos Viventes — Espírito, Alma e Corpo</em>.
           </p>
         </div>
       </header>
@@ -42,6 +43,25 @@ export default function Autor() {
           </Aparece>
 
           <Aparece como="div" className="leitura" atraso={90}>
+            <h2>Biografia</h2>
+            <p>
+              Eleno Gutemberg Silva é professor de ensino bíblico, educador cristão e escritor, com
+              formação básica em Teologia. Casado, dedica-se ao estudo das Escrituras e à produção de
+              conteúdos que unem fundamento bíblico, clareza didática e aplicação prática para a
+              vida cristã.
+            </p>
+            <p>
+              O trabalho dele é voltado à formação espiritual de leitores que desejam compreender a
+              Bíblia de forma simples, profunda e responsável — fortalecendo a fé, o discernimento e
+              os valores cristãos. Escreve para edificar, instruir e auxiliar pessoas, famílias e
+              comunidades no crescimento espiritual.
+            </p>
+            <p>
+              Como autor cristão, assume compromisso com a verdade bíblica, a ética cristã e o ensino
+              acessível, buscando responder aos desafios do tempo presente à luz das Escrituras.
+            </p>
+
+            <h2>O acervo</h2>
             <p>
               Eleno Gutemberg escreve sobre teologia bíblica, história antiga e o encontro entre fé e
               sociedade. O acervo que ele mantém não é um blog de opinião: é uma enciclopédia — os

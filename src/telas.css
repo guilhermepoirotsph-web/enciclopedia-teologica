@@ -275,6 +275,27 @@
   color: #6f7a8c;
   text-align: center;
 }
+.ficha-livro {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.7rem 1.2rem;
+  margin: 1.4rem auto 0;
+  max-width: 300px;
+  padding: 1rem 1.1rem;
+  border: 1px solid rgba(201, 162, 74, 0.28);
+  border-radius: 4px;
+}
+.ficha-livro dt {
+  font-size: 0.66rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #6f7a8c;
+}
+.ficha-livro dd {
+  margin: 0.15rem 0 0;
+  font-size: 0.9rem;
+  color: #f4eee2;
+}
 
 .lista-numerada {
   list-style: none;

@@ -11,8 +11,8 @@ export default function Livro() {
           <p className="rotulo">Obra publicada</p>
           <h1>Na Terra dos Viventes</h1>
           <p className="olho">
-            Espírito, alma e corpo — o que somos, o que morre e o que atravessa. O livro em que
-            Eleno Gutemberg enfrenta a pergunta que quase toda igreja adia.
+            Espírito, Alma e Corpo — a origem, a natureza e o destino do ser humano à luz das
+            Escrituras, por Eleno Gutemberg Silva.
           </p>
         </div>
       </header>
@@ -22,25 +22,35 @@ export default function Livro() {
           <Aparece className="livro-faixa__capa">
             <CapaLivro />
             <p className="capa-livro__nota">1ª edição, 2026 · Editora DAS — Digital Ars Science</p>
+            <dl className="ficha-livro">
+              <div><dt>Formato</dt><dd>eBook</dd></div>
+              <div><dt>Idioma</dt><dd>Português</dd></div>
+              <div><dt>Preço</dt><dd>R$ 25,00</dd></div>
+              <div><dt>Garantia</dt><dd>7 dias, pela Hotmart</dd></div>
+            </dl>
           </Aparece>
 
           <div>
             <Aparece como="div" className="leitura">
               <p>
-                Existe uma pergunta que atravessa o luto, o medo e a fé de qualquer pessoa: o que
-                exatamente permanece quando o corpo para? A resposta de púlpito costuma ser curta
-                demais, e a resposta da filosofia costuma ser longa demais para servir de consolo.
+                Este livro apresenta uma reflexão profunda sobre a origem, a natureza e o destino do
+                ser humano à luz das Escrituras. Explora o propósito divino na criação do homem, a
+                sua queda e o plano perfeito de redenção em Jesus Cristo, o segundo Adão.
               </p>
               <p>
-                <strong>Na Terra dos Viventes</strong> encara a constituição do ser humano com o
-                mesmo método dos estudos deste acervo: texto no contexto, palavra no original,
-                história onde a história ajuda. Espírito, alma e corpo deixam de ser três palavras
-                repetidas no culto e passam a ser três realidades com função, origem e destino.
+                A obra mostra como o homem, criado à imagem de Deus, foi limitado pelo corpo para
+                amadurecer espiritualmente e alcançar a perfeição moral — e explica a diferença entre
+                corpo, alma e espírito, e o papel de cada um na formação do ser completo.
               </p>
               <p>
-                É um livro para quem já leu superficialidade suficiente sobre o assunto e quer ver a
-                questão tratada por inteiro — inclusive nas partes em que a resposta honesta é
-                &ldquo;o texto não diz&rdquo;.
+                Com base em passagens bíblicas e numa análise espiritual detalhada, o texto aborda a
+                rebeldia de Lúcifer, a morte e a imortalidade, o juízo eterno, a vitória de Cristo
+                sobre o pecado e a morte, o livre-arbítrio e a soberania de Deus.
+              </p>
+              <p>
+                Mais do que um estudo teológico, é um convite à reflexão sobre a vida eterna, a
+                consciência espiritual e o propósito do homem: viver em comunhão perfeita com o
+                Criador.
               </p>
             </Aparece>
 

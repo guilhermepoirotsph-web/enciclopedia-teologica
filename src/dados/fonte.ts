@@ -135,10 +135,10 @@ const OBRAS_BASE: Obra[] = [
     titulo: 'Na Terra dos Viventes',
     subtitulo: 'Espírito, Alma e Corpo · 1ª edição, 2026',
     descricao:
-      'O livro em que Eleno Gutemberg destrincha a constituição tripartida do ser humano — o que é espírito, o que é alma, o que morre, o que permanece — e o que as Escrituras dizem sobre a terra dos viventes.',
+      'A origem, a natureza e o destino do ser humano à luz das Escrituras: a diferença entre espírito, alma e corpo, a queda, a redenção em Cristo — o segundo Adão —, a morte, a imortalidade e o juízo eterno. eBook com garantia de 7 dias pela Hotmart.',
     capa: '/marca/livro-capa.png',
     tipo: 'livro',
-    precoCentavos: null,
+    precoCentavos: 2500,
     linkExterno: 'https://go.hotmart.com/I103629686U',
     exemplo: false,
     ativo: true,
