@@ -22,7 +22,7 @@ import { createClient, type SupabaseClient } from '@supabase/supabase-js';
  * com tarja permanente avisando que nada é salvo. Aprovado o desenho, o build
  * normal volta a falar com o Supabase.
  */
-const previa = import.meta.env.VITE_PREVIA === '1';
+const previa = import.meta.env?.VITE_PREVIA === '1';
 
 export const SUPABASE_URL = previa ? '' : 'https://xssklzwhkxmavtcjorre.supabase.co';
 export const SUPABASE_CHAVE_PUBLICAVEL = previa ? '' : 'sb_publishable_33CrvSMfufyae8yPo317RQ_1CeKFJ8r';

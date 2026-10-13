@@ -1,0 +1,47 @@
+# ============================================================================
+#  Sentinela — mantém o banco acordado e avisa se o site cair.
+#
+#  O plano Free do Supabase PAUSA o projeto depois de 7 dias de pouca
+#  atividade, e voltar do pause é MANUAL, pelo painel. Aconteceu aqui: o banco
+#  ficou sem visita (site com noindex, sem domínio) e em 12/10/2026 o endereço
+#  do projeto já nem existia no DNS — a biblioteca listava os 97 estudos e cada
+#  um abria "não encontrado", e o painel do autor não deixava entrar.
+#
+#  Esta rotina roda a conferência de fora (scripts/conferir-banco.mjs) a cada
+#  2 dias: lê as views públicas — o que acorda o projeto — e confere que as
+#  tabelas cruas continuam fechadas para a chave pública.
+#
+#  ⚠ O GitHub DESLIGA workflow agendado em repositório sem commit por 60 dias
+#  (manda e-mail antes). Se acontecer, reative na aba Actions.
+#
+#  Sem segredo: a chave usada é a publishable, que já está no site.
+# ============================================================================
+name: Sentinela
+
+on:
+  schedule:
+    - cron: '23 9 */2 * *'     # 09:23 UTC = 06:23 em Brasília, dia sim dia não
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  conferir:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci --ignore-scripts
+
+      - name: O banco responde e as portas fechadas seguem fechadas?
+        run: node scripts/conferir-banco.mjs
+
+      - name: O site está no ar?
+        run: |
+          COD=$(curl -s -o /dev/null -w '%{http_code}' --max-time 30 https://enciclopedia-teologica.pages.dev/)
+          echo "site → HTTP $COD"
+          test "$COD" = "200" || { echo "::error::o site não respondeu 200"; exit 1; }

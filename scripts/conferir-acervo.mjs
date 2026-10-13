@@ -17,8 +17,8 @@ const RAIZ = join(dirname(fileURLToPath(import.meta.url)), '..');
 const DIR = join(RAIZ, 'public', 'conteudo', 'artigos');
 
 const fonte = readFileSync(join(RAIZ, 'src', 'dados', 'supabase.ts'), 'utf8');
-const base = process.argv[2] || fonte.match(/SUPABASE_URL = '([^']*)'/)?.[1];
-const chave = process.argv[3] || fonte.match(/SUPABASE_CHAVE_PUBLICAVEL = '([^']*)'/)?.[1];
+const base = process.argv[2] || fonte.match(/SUPABASE_URL = [^;]*'(https:[^']*)'/)?.[1];
+const chave = process.argv[3] || fonte.match(/SUPABASE_CHAVE_PUBLICAVEL = [^;]*'(sb_publishable_[^']*)'/)?.[1];
 
 if (!base || !chave) {
   console.error('Sem URL/chave do Supabase.');

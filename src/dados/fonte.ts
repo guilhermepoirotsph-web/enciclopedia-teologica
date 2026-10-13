@@ -100,7 +100,12 @@ export async function lerArtigo(slug: string): Promise<ArtigoCompleto | null> {
         cortado: Boolean(linha.cortado),
       };
     }
-    return null;
+    // Banco respondeu e não achou: o estudo não existe ou não está publicado.
+    // Banco NÃO respondeu (pausado, fora do ar, sem rede): cai no acervo
+    // publicado, como a lista já fazia. Antes daqui, o projeto pausado no plano
+    // grátis deixava a biblioteca listando 97 estudos e cada um abrindo
+    // "não encontrado" (12/10/2026).
+    if (!error) return null;
   }
 
   try {
