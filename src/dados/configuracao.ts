@@ -58,7 +58,7 @@ const PADRAO: Config = {
   autor: 'Eleno Gutemberg',
   lema: 'Organizar o conhecimento para quem leva as Escrituras a sério.',
 
-  whatsapp: '',
+  whatsapp: '5512981408270', // (12) 98140-8270, informado em 13/10/2026
   email: '',
   instagram: '',
   youtube: '',
