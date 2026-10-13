@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import Aparece from '../componentes/Aparece';
-import Selo from '../marca/Selo';
+import RetratoAutor from '../componentes/RetratoAutor';
 import { listarArtigos, listarEixos } from '../dados/fonte';
 import { SITE } from '../dados/configuracao';
 import type { Artigo, Eixo } from '../dados/tipos';
@@ -35,12 +35,9 @@ export default function Autor() {
       <section className="secao">
         <div className="miolo autor">
           <Aparece className="autor__retrato">
-            <div className="autor__moldura">
-              <Selo tamanho={150} />
+            <div className="autor__moldura autor__moldura--foto">
+              <RetratoAutor />
             </div>
-            <p className="capa-livro__nota">
-              Retrato do autor a enviar — até lá, o selo da enciclopédia ocupa o lugar.
-            </p>
           </Aparece>
 
           <Aparece como="div" className="leitura" atraso={90}>

@@ -9,6 +9,7 @@ import CapaLivro from '../componentes/CapaLivro';
 import { montarRosacea, type Rosacea } from '../cena/rosacea';
 import { listarArtigos, listarEixos } from '../dados/fonte';
 import { SITE } from '../dados/configuracao';
+import RetratoAutor from '../componentes/RetratoAutor';
 import type { Artigo, Eixo } from '../dados/tipos';
 
 gsap.registerPlugin(ScrollTrigger);
@@ -384,8 +385,8 @@ function OAutor() {
     <section className="secao">
       <div className="miolo autor">
         <Aparece className="autor__retrato">
-          <div className="autor__moldura">
-            <Selo tamanho={140} />
+          <div className="autor__moldura autor__moldura--foto">
+            <RetratoAutor />
           </div>
         </Aparece>
 
