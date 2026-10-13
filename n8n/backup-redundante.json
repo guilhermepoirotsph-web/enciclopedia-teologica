@@ -1,0 +1,80 @@
+{
+  "name": "Enciclopédia Teológica — Backup redundante do banco",
+  "nodes": [
+    {
+      "id": "enc-cron",
+      "name": "Todo dia 04:10",
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.2,
+      "position": [0, 0],
+      "parameters": {
+        "rule": { "interval": [{ "field": "days", "triggerAtHour": 4, "triggerAtMinute": 10 }] }
+      },
+      "notes": "10 min DEPOIS do pg_cron das 04h (sql/05-backup.sql). Segunda garantia: se o de dentro do banco não rodou, este roda."
+    },
+    {
+      "id": "enc-rpc",
+      "name": "Pede o backup ao banco",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [240, 0],
+      "parameters": {
+        "method": "POST",
+        "url": "https://qcrdlmkguhxneagpcybb.supabase.co/rest/v1/rpc/fn_backup_redundante",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            { "name": "apikey", "value": "sb_publishable_ywmtb3Xr4Ucj9Jf2NVrvxg_RvRFI97Z" },
+            { "name": "Content-Type", "value": "application/json" }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "{}",
+        "options": { "timeout": 120000 }
+      },
+      "retryOnFail": true,
+      "maxTries": 3,
+      "waitBetweenTries": 5000,
+      "notes": "Chave PUBLICÁVEL (a mesma do site) — não é segredo. A função só gera backup se o último tiver mais de 20h, então não dá para abusar."
+    },
+    {
+      "id": "enc-if",
+      "name": "Backup confirmado?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [480, 0],
+      "parameters": {
+        "conditions": {
+          "options": { "caseSensitive": true, "leftValue": "", "typeValidation": "loose", "version": 2 },
+          "conditions": [
+            {
+              "id": "enc-cond-ok",
+              "leftValue": "={{ $json.ok }}",
+              "rightValue": true,
+              "operator": { "type": "boolean", "operation": "true", "singleValue": true }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      }
+    },
+    {
+      "id": "enc-erro",
+      "name": "Falhou — acusa erro",
+      "type": "n8n-nodes-base.stopAndError",
+      "typeVersion": 1,
+      "position": [720, 120],
+      "parameters": {
+        "errorMessage": "={{ 'Backup da Enciclopédia NÃO confirmado: ' + JSON.stringify($json) }}"
+      }
+    }
+  ],
+  "connections": {
+    "Todo dia 04:10": { "main": [[{ "node": "Pede o backup ao banco", "type": "main", "index": 0 }]] },
+    "Pede o backup ao banco": { "main": [[{ "node": "Backup confirmado?", "type": "main", "index": 0 }]] },
+    "Backup confirmado?": { "main": [[], [{ "node": "Falhou — acusa erro", "type": "main", "index": 0 }]] }
+  },
+  "settings": { "executionOrder": "v1", "timezone": "America/Sao_Paulo" }
+}

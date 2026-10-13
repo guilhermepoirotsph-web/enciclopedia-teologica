@@ -104,7 +104,12 @@ Para recriar do zero, no SQL Editor e nesta ordem:
    inteiro tem 730 KB e trava o editor
 3. `sql/04-datas.sql` (devolve as datas reais; o gatilho de carimbo fica desligado durante)
 4. `sql/05-backup.sql` (cofre de backups + pg_cron diário às 04h, guarda 30; só admin lê)
-5. `sql/03-promover.sql`, trocando o e-mail
+5. `sql/06-backup-redundante.sql` (porta sem segredo para o n8n: só gera backup se o último tiver +20h)
+6. `sql/03-promover.sql`, trocando o e-mail
+
+n8n (VPS 40.80.91.115:5678): fluxo **Enciclopédia Teológica — Backup redundante do banco**
+(id `Aq6MXhLLwJhF2YtJ`, publicado), todo dia 04:10 BRT, chama `fn_backup_redundante` com a
+chave publicável. Cópia do JSON em `n8n/backup-redundante.json`.
 
 Depois, sempre: `node scripts/conferir-banco.mjs`.
 
