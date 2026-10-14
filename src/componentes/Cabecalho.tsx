@@ -57,9 +57,14 @@ export default function Cabecalho() {
               Painel
             </Link>
           )}
-          <Link to={perfil ? '/conta' : '/entrar'} className="btn btn--linha topo__btn">
-            {perfil ? 'Minha conta' : 'Entrar'}
-          </Link>
+          {/* Sem botão "Entrar" para o visitante (pedido do Guilherme, 14/10/2026):
+              a biblioteca é aberta e o login é só do autor — que entra pelo endereço
+              /entrar que recebeu. Quem já está logado continua vendo a própria conta. */}
+          {perfil && (
+            <Link to="/conta" className="btn btn--linha topo__btn">
+              Minha conta
+            </Link>
+          )}
           <button
             className="topo__hamburguer"
             onClick={() => setAberto((v) => !v)}
@@ -86,9 +91,11 @@ export default function Cabecalho() {
               Painel
             </NavLink>
           )}
-          <NavLink to={perfil ? '/conta' : '/entrar'} className="gaveta__link gaveta__link--ouro">
-            {perfil ? 'Minha conta' : 'Entrar'}
-          </NavLink>
+          {perfil && (
+            <NavLink to="/conta" className="gaveta__link gaveta__link--ouro">
+              Minha conta
+            </NavLink>
+          )}
         </nav>
       </div>
     </header>

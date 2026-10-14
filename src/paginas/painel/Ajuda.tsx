@@ -139,8 +139,9 @@ export default function Ajuda() {
             ligado. Nesse modo dá para testar tudo, mas nada é salvo de verdade.
           </li>
           <li>
-            <strong>Esqueci a senha:</strong> use “Entrar” no site e o próprio sistema envia a
-            redefinição por e-mail. Ninguém, nem a equipe técnica, consegue ver sua senha.
+            <strong>Esqueci a senha:</strong> fale com a equipe técnica (GD Studio X), que cria uma
+            senha nova para você pelo painel do banco de dados. Ninguém consegue ver a sua senha
+            atual — ela só pode ser trocada.
           </li>
         </ul>
       </div>

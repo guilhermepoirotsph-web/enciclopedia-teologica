@@ -65,7 +65,7 @@ export default function Nucleo() {
             </div>
             <h2 className="secao__titulo">Publicado e à venda</h2>
 
-            <div className="grade grade--2" style={{ marginTop: '2.4rem' }}>
+            <div className={`grade ${prontas.length >= 3 ? 'grade--3' : 'grade--2'}`} style={{ marginTop: '2.4rem' }}>
               {prontas.map((o) => (
                 <Aparece key={o.slug}>
                   <ObraCartao o={o} />
@@ -133,6 +133,9 @@ export default function Nucleo() {
   );
 }
 
+const reais = (centavos: number) =>
+  (centavos / 100).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+
 function ObraCartao({ o }: { o: Obra }) {
   return (
     <article className={`cartao obra ${o.exemplo ? 'obra--preparo' : ''}`}>
@@ -153,7 +156,7 @@ function ObraCartao({ o }: { o: Obra }) {
           <span className="selo selo--aviso">Em preparação</span>
         ) : o.linkExterno ? (
           <a href={o.linkExterno} target="_blank" rel="noopener noreferrer" className="btn btn--ouro btn--bloco">
-            Comprar
+            {o.precoCentavos ? `Comprar · ${reais(o.precoCentavos)}` : 'Comprar'}
           </a>
         ) : (
           <span className="selo selo--aberto">Disponível</span>

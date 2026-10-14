@@ -166,7 +166,7 @@ function Hero({ total }: { total: number }) {
 
         <div className="hero__acoes hero__revela">
           <Link to="/biblioteca" className="btn btn--ouro">
-            Entrar na biblioteca
+            Explorar a biblioteca
           </Link>
           <Link to="/livro" className="btn btn--linha">
             Conhecer o livro

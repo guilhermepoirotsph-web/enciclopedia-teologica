@@ -128,11 +128,10 @@ export async function lerArtigo(slug: string): Promise<ArtigoCompleto | null> {
 /**
  * Catálogo do Núcleo de Estudos.
  *
- * Só o livro é real hoje — está publicado na Hotmart e o link é o dele. Os
- * outros três nascem marcados como `exemplo: true` e aparecem no site com a
- * tarja "EM PREPARAÇÃO", porque anunciar produto que não existe é o jeito mais
- * rápido de queimar a credibilidade de um portal de doutrina. O Eleno troca
- * cada um pelo conteúdo real direto no painel.
+ * As três obras são reais e estão à venda na Hotmart (conferidas nas páginas
+ * públicas em 12/09 e 14/10/2026). Os exemplos "em preparação" que existiam
+ * aqui saíram: com o banco ligado o site lê a tabela `obras`, e a reserva tem
+ * que mostrar o mesmo catálogo — nunca produto que não existe.
  */
 const OBRAS_BASE: Obra[] = [
   {
@@ -141,7 +140,7 @@ const OBRAS_BASE: Obra[] = [
     subtitulo: 'Espírito, Alma e Corpo · 1ª edição, 2026',
     descricao:
       'A origem, a natureza e o destino do ser humano à luz das Escrituras: a diferença entre espírito, alma e corpo, a queda, a redenção em Cristo — o segundo Adão —, a morte, a imortalidade e o juízo eterno. eBook com garantia de 7 dias pela Hotmart.',
-    capa: '/marca/livro-capa.png',
+    capa: '/marca/livro-capa-600.webp',
     tipo: 'livro',
     precoCentavos: 2500,
     linkExterno: 'https://go.hotmart.com/I103629686U',
@@ -150,46 +149,32 @@ const OBRAS_BASE: Obra[] = [
     ordem: 0,
   },
   {
-    slug: 'serie-escatologia',
-    titulo: 'Escatologia sem Sensacionalismo',
-    subtitulo: 'Série de estudos aprofundados',
+    slug: 'na-terra-dos-viventes-kronos',
+    titulo: 'Na Terra dos Viventes — Kronos',
+    subtitulo: '2º volume da série Na Terra dos Viventes · 1ª edição',
     descricao:
-      'As oito peças do eixo de Escatologia reunidas em ordem de leitura, com material de apoio, linha do tempo das dispensações e roteiro para estudo em grupo.',
-    capa: null,
-    tipo: 'serie',
-    precoCentavos: null,
-    linkExterno: null,
-    exemplo: true,
+      'Uma visão cronológica da história da humanidade à luz das Escrituras: uma linha do tempo detalhada pelas épocas e períodos do plano divino, da criação ao último período probatório dos homens — e como cada era se encaixa no projeto de redenção e justiça de Deus. eBook com garantia de 7 dias pela Hotmart.',
+    capa: '/marca/capa-kronos.webp',
+    tipo: 'livro',
+    precoCentavos: 1500,
+    linkExterno: 'https://hotmart.com/pt-br/marketplace/produtos/na-terra-dos-viventes-kronos/T103643057O',
+    exemplo: false,
     ativo: true,
     ordem: 1,
   },
   {
-    slug: 'curso-hermeneutica',
-    titulo: 'Ler a Bíblia por Inteiro',
-    subtitulo: 'Curso de hermenêutica aplicada',
+    slug: 'epistola-as-denominacoes-evangelicas-do-brasil',
+    titulo: 'Epístola às Denominações Evangélicas do Brasil',
+    subtitulo: 'Manifesto à Igreja',
     descricao:
-      'Método de leitura que o autor usa nos artigos: contexto histórico, gênero literário, léxico grego e hebraico, e a diferença entre o que o texto diz e o que se quer que ele diga.',
-    capa: null,
-    tipo: 'curso',
-    precoCentavos: null,
-    linkExterno: null,
-    exemplo: true,
+      'Uma exortação profunda e necessária que convoca a Igreja brasileira a retornar ao centro de sua fé: Jesus Cristo. Inspirada no rigor ético e na linguagem das epístolas do Novo Testamento, a carta aborda temas urgentes que têm desafiado a unidade do Corpo de Cristo. eBook com garantia de 7 dias pela Hotmart.',
+    capa: '/marca/capa-epistola.webp',
+    tipo: 'livro',
+    precoCentavos: 500,
+    linkExterno: 'https://hotmart.com/pt-br/marketplace/produtos/epistola-as-denominacoes-evangelicas-do-brasil/K104385228G',
+    exemplo: false,
     ativo: true,
     ordem: 2,
-  },
-  {
-    slug: 'circulo-do-pesquisador',
-    titulo: 'Círculo do Pesquisador',
-    subtitulo: 'Acesso mensal',
-    descricao:
-      'Estudos inéditos antes da publicação aberta, respostas às perguntas dos membros e encontro mensal ao vivo para discussão dos temas em pauta.',
-    capa: null,
-    tipo: 'plano',
-    precoCentavos: null,
-    linkExterno: null,
-    exemplo: true,
-    ativo: true,
-    ordem: 3,
   },
 ];
 
