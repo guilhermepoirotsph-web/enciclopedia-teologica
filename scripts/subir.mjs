@@ -29,6 +29,11 @@ if (cru && !dominio) console.log(`aviso: argumento "${cru}" veio mexido pelo she
 
 const passo = (t) => console.log(`\n── ${t}\n`);
 
+// A reserva estática (estudos que o site mostra se o banco cair, páginas
+// pré-geradas e sitemap) sai do banco — que é alimentado pelo Notion.
+passo('Reserva do acervo a partir do banco');
+execFileSync(process.execPath, [join(RAIZ, 'scripts', 'acervo-do-banco.mjs')], { cwd: RAIZ, stdio: 'inherit' });
+
 passo(dominio ? `Build para ${dominio}` : 'Build para o endereço provisório');
 execFileSync(process.execPath, [join(RAIZ, 'scripts', 'publicar.mjs'), '/', dominio], {
   cwd: RAIZ,

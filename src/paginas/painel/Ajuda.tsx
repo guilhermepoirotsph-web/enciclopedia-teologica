@@ -14,7 +14,42 @@ export default function Ajuda() {
       </header>
 
       <div className="leitura" style={{ maxWidth: '72ch' }}>
-        <h2>Publicar um estudo novo</h2>
+        <h2>O jeito mais fácil: escrever no Notion</h2>
+        <p>
+          O site está ligado à sua base <strong>Central de Artigos</strong> no Notion. Escreva e
+          corrija os estudos lá, como sempre: o site confere sozinho a cada 30 minutos e traz o que
+          for novo ou alterado — título, categoria, texto, negrito, itálico e links.
+        </p>
+        <ul>
+          <li>
+            <strong>Estudo novo no Notion</strong> entra no site já publicado e aberto.
+          </li>
+          <li>
+            <strong>Link para outra página da Central de Artigos</strong> (ou menção com @) vira link
+            para o estudo correspondente aqui no site.
+          </li>
+          <li>
+            <strong>Estudo apagado no Notion</strong> sai do site — mas não é apagado do banco; se ele
+            voltar no Notion, volta no site.
+          </li>
+          <li>
+            <strong>Quer ver na hora?</strong> Em <strong>Resumo</strong>, clique em
+            <strong> Sincronizar agora</strong>.
+          </li>
+        </ul>
+        <p>
+          O que continua sendo decidido só aqui no painel: marcar um estudo como <strong>Núcleo</strong>
+          (pago), ocultar do site e a foto de capa. Estudo com o mesmo nome de um livro que você vende
+          no Núcleo fica bloqueado sozinho. Edição de texto feita aqui num estudo que veio do Notion
+          vale até a próxima vez que ele for alterado lá.
+        </p>
+        <p>
+          <strong>Atenção:</strong> a base precisa continuar <strong>publicada na web</strong> no
+          Notion (Compartilhar → Publicar). Se a publicação for desligada, o site para de receber
+          atualizações e avisa o erro no Resumo — nada é apagado.
+        </p>
+
+        <h2>Publicar um estudo novo pelo painel</h2>
         <ol>
           <li>Clique em <strong>Escrever novo</strong> no menu da esquerda.</li>
           <li>Escreva o título. É ele que vira o endereço da página.</li>

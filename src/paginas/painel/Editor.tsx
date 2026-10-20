@@ -99,6 +99,14 @@ export default function Editor({ novo = false }: { novo?: boolean }) {
 
       {aviso && <p className={`recado recado--${aviso.tom}`} style={{ marginBottom: '1.4rem' }}>{aviso.texto}</p>}
 
+      {a.notion && (
+        <p className="recado recado--aviso" style={{ marginBottom: '1.4rem' }}>
+          Este estudo vem do Notion. O texto é atualizado de lá: título, resumo e corpo mudados aqui
+          serão substituídos na próxima vez que ele for editado no Notion. Núcleo, publicação e capa
+          são decididos só aqui no painel.
+        </p>
+      )}
+
       <div className="editor">
         <div className="editor__campos">
           <label className="campo">

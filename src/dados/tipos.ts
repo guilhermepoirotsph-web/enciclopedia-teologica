@@ -14,6 +14,8 @@ export type Artigo = {
   premium: boolean;
   publicado: boolean;
   capa?: string | null;
+  /** veio do Notion: o texto é atualizado de lá pela sincronização */
+  notion?: boolean;
 };
 
 export type ArtigoCompleto = Artigo & {

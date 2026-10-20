@@ -1,4 +1,4 @@
-import { supabase, temBanco } from './supabase';
+import { supabase, temBanco, SUPABASE_URL, SUPABASE_CHAVE_PUBLICAVEL } from './supabase';
 import { listarArtigos, lerArtigo, listarEixos, listarObras } from './fonte';
 import type { Artigo, ArtigoCompleto, Eixo, Obra } from './tipos';
 import { gravarRascunho, lerRascunho } from './rascunho';
@@ -23,7 +23,7 @@ export async function painelArtigos(): Promise<Artigo[]> {
   if (temBanco) {
     const { data, error } = await supabase!
       .from('artigos')
-      .select('slug,titulo,icone,eixos,resumo,criado_em,atualizado_em,palavras,minutos,premium,publicado,capa')
+      .select('slug,titulo,icone,eixos,resumo,criado_em,atualizado_em,palavras,minutos,premium,publicado,capa,notion_id')
       .order('atualizado_em', { ascending: false });
     if (error) throw error;
     return (data as Record<string, unknown>[]).map(mapear);
@@ -215,7 +215,50 @@ function mapear(a: Record<string, unknown>): Artigo {
     premium: Boolean(a.premium),
     publicado: a.publicado === undefined ? true : Boolean(a.publicado),
     capa: (a.capa as string) ?? null,
+    notion: Boolean(a.notion_id),
   };
+}
+
+/* ------------------------------------------------------------- Notion */
+
+export type RelatorioNotion = {
+  em?: string;
+  notion?: number;
+  novos?: string[];
+  atualizados?: string[];
+  bloqueados?: string[];
+  despublicados?: string[];
+  faltam?: number;
+  erros?: string[];
+  erro?: string;
+};
+
+/** Quando a sincronização rodou pela última vez e o que ela fez. */
+export async function statusNotion(): Promise<{ em: string | null; relatorio: RelatorioNotion | null } | null> {
+  if (!temBanco) return null;
+  const { data, error } = await supabase!
+    .from('config')
+    .select('chave,valor')
+    .in('chave', ['notion_sync_em', 'notion_sync_relatorio']);
+  if (error) return null;
+  const c = Object.fromEntries((data as { chave: string; valor: string }[]).map((x) => [x.chave, x.valor]));
+  let relatorio: RelatorioNotion | null = null;
+  try {
+    relatorio = c.notion_sync_relatorio ? JSON.parse(c.notion_sync_relatorio) : null;
+  } catch {
+    relatorio = null;
+  }
+  return { em: c.notion_sync_em || null, relatorio };
+}
+
+/** Pede uma conferência agora. A função tem trava de 1 minuto entre execuções. */
+export async function sincronizarNotion(): Promise<RelatorioNotion & { ok?: boolean; pulado?: boolean; mensagem?: string }> {
+  const r = await fetch(`${SUPABASE_URL}/functions/v1/sincronizar-notion`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json', apikey: SUPABASE_CHAVE_PUBLICAVEL },
+    body: JSON.stringify({ origem: 'painel' }),
+  });
+  return r.json();
 }
 
 export function slugificar(s: string) {
