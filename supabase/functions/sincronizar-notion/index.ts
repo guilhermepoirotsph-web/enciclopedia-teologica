@@ -25,10 +25,26 @@ const NOTION = 'https://www.notion.so/api/v3';
 const LOTE = 25;
 /** Intervalo mínimo entre execuções (cron e botão do painel). */
 const ESPERA_MS = 60_000;
+/** Tempo máximo de conversão por execução (a função tem limite de ~150 s). O resto espera a próxima. */
+const TEMPO_MAX_MS = 100_000;
+const AGENTE = 'EnciclopediaTeologica-sync/1.0 (+https://enciclopedia-teologica.pages.dev)';
+
+/**
+ * Segredo da função. Em produção vem de `supabase secrets` / painel do Supabase
+ * (nome NOTION_TOKEN) e nunca passa pelo código nem pelo chat. No teste local,
+ * vem do ambiente do Node.
+ */
+function segredo(nome: string): string | undefined {
+  const g = globalThis as unknown as {
+    Deno?: { env?: { get(k: string): string | undefined } };
+    process?: { env?: Record<string, string | undefined> };
+  };
+  return g.Deno?.env?.get(nome) ?? g.process?.env?.[nome] ?? undefined;
+}
 
 /* ================================================================ Notion */
 
-type Registro = { value?: { value?: Bloco } & Bloco };
+type Registro = { value?: { value?: Bloco } & Partial<Bloco> };
 type Bloco = {
   id: string;
   type?: string;
@@ -78,7 +94,7 @@ async function notion(caminho: string, corpo: unknown) {
 }
 
 /** Todas as linhas da base, com título, categorias e datas do bloco. */
-export async function listarBase(baseId = BASE_PADRAO): Promise<Linha[]> {
+async function listarBaseInterna(baseId: string): Promise<Linha[]> {
   const id = comTracos(baseId);
   const pc = await notion('loadPageChunk', { pageId: id, limit: 5, cursor: { stack: [] }, chunkNumber: 0, verticalColumns: false });
   const base = valor(pc.recordMap?.block?.[id]);
@@ -117,8 +133,191 @@ export async function listarBase(baseId = BASE_PADRAO): Promise<Linha[]> {
     }));
 }
 
+/* ===================================================== API oficial (token) */
+
+const API_OFICIAL = 'https://api.notion.com/v1';
+/** Versão que mantém a consulta de base (`databases/{id}/query`). */
+const VERSAO_API = '2022-06-28';
+let ultimaChamadaOficial = 0;
+
+/**
+ * Uma chamada à API oficial. Espaça as chamadas (o Notion aceita ~3 por segundo),
+ * respeita Retry-After no 429 e nunca escreve o token em mensagem de erro.
+ */
+export async function oficial(caminho: string, token: string, metodo: 'GET' | 'POST' = 'GET', corpo?: unknown): Promise<any> {
+  for (let tentativa = 0; ; tentativa++) {
+    const falta = ultimaChamadaOficial + 340 - Date.now();
+    if (falta > 0) await dormir(falta);
+    ultimaChamadaOficial = Date.now();
+    const r = await fetch(`${API_OFICIAL}/${caminho}`, {
+      method: metodo,
+      headers: {
+        Authorization: `Bearer ${token}`,
+        'Notion-Version': VERSAO_API,
+        'Content-Type': 'application/json',
+        'user-agent': AGENTE,
+      },
+      body: corpo === undefined ? undefined : JSON.stringify(corpo),
+    });
+    if (r.ok) return r.json();
+    if ((r.status === 429 || r.status >= 500) && tentativa < 5) {
+      const pedido = Number(r.headers.get('retry-after'));
+      await dormir(Number.isFinite(pedido) && pedido > 0 ? Math.min(pedido, 30) * 1000 : 1000 * 2 ** tentativa);
+      continue;
+    }
+    const detalhe = await r.text().catch(() => '');
+    const dica =
+      r.status === 401 || r.status === 403
+        ? ' — confira o token e se a integração "Site Enciclopédia" está conectada à Central de Artigos'
+        : '';
+    throw new Error(`API do Notion (${caminho.split('?')[0]}) respondeu HTTP ${r.status}${dica}: ${detalhe.slice(0, 160)}`);
+  }
+}
+
+/** Filhos diretos de um bloco/página, todas as páginas da resposta. */
+async function filhosOficiais(id: string, token: string): Promise<any[]> {
+  const todos: any[] = [];
+  let cursor: string | undefined;
+  do {
+    const r = await oficial(`blocks/${id}/children?page_size=100${cursor ? `&start_cursor=${cursor}` : ''}`, token);
+    todos.push(...(r.results ?? []));
+    cursor = r.has_more ? r.next_cursor : undefined;
+  } while (cursor);
+  return todos.filter((b) => !b.archived && !b.in_trash);
+}
+
+/** Acha a base de artigos dentro da página "Central de Artigos" (até 3 níveis). */
+async function acharBase(paginaId: string, token: string): Promise<string> {
+  const achadas: { id: string; titulo: string }[] = [];
+  const fila: { id: string; nivel: number }[] = [{ id: paginaId, nivel: 0 }];
+  while (fila.length) {
+    const { id, nivel } = fila.shift()!;
+    for (const b of await filhosOficiais(id, token)) {
+      if (b.type === 'child_database') achadas.push({ id: b.id, titulo: plano(b.child_database?.title ? [[b.child_database.title]] : undefined) });
+      else if (b.has_children && nivel < 3) fila.push({ id: b.id, nivel: nivel + 1 });
+    }
+    if (achadas.length) break;
+  }
+  if (!achadas.length) {
+    throw new Error('Não achei a base "Central de Artigos" dentro da página. Confira se a integração "Site Enciclopédia" está conectada a ela (⋯ → Conexões).');
+  }
+  return (achadas.find((a) => /artigo|central/i.test(a.titulo)) ?? achadas[0]).id;
+}
+
+async function listarBaseOficial(paginaId: string, token: string): Promise<Linha[]> {
+  const dbId = await acharBase(paginaId, token);
+  const linhas: Linha[] = [];
+  let cursor: string | undefined;
+  do {
+    const r = await oficial(`databases/${dbId}/query`, token, 'POST', { page_size: 100, ...(cursor ? { start_cursor: cursor } : {}) });
+    for (const p of r.results ?? []) {
+      if (p.archived || p.in_trash) continue;
+      const props = p.properties ?? {};
+      const chaveTitulo = Object.keys(props).find((k) => props[k]?.type === 'title') ?? '';
+      const chaveCategoria = Object.keys(props).find((k) => props[k]?.type === 'multi_select' && /categoria/i.test(k)) ?? '';
+      linhas.push({
+        id: p.id,
+        titulo: (props[chaveTitulo]?.title ?? []).map((t: any) => t.plain_text ?? '').join(''),
+        categorias: (props[chaveCategoria]?.multi_select ?? []).map((o: any) => o.name as string),
+        criado: Date.parse(p.created_time) || 0,
+        editado: Date.parse(p.last_edited_time) || 0,
+      });
+    }
+    cursor = r.has_more ? r.next_cursor : undefined;
+  } while (cursor);
+  return linhas;
+}
+
+/** Tipo da API oficial → tipo que o conversor já entende (o mesmo da API interna). */
+const TIPOS_OFICIAIS: Record<string, string> = {
+  heading_1: 'header',
+  heading_2: 'sub_header',
+  heading_3: 'sub_sub_header',
+  paragraph: 'text',
+  bulleted_list_item: 'bulleted_list',
+  numbered_list_item: 'numbered_list',
+  quote: 'quote',
+  callout: 'callout',
+  toggle: 'toggle',
+  code: 'code',
+  divider: 'divider',
+  image: 'image',
+  child_page: 'page',
+};
+
+/** Texto rico da API oficial → formato interno: [[texto, [[marca, arg?]...]?]...]. */
+export function converterRicoOficial(rt: any[] = []): Rico {
+  return rt.map((t) => {
+    const marcas: string[][] = [];
+    const a = t.annotations ?? {};
+    if (a.code) marcas.push(['c']);
+    if (a.bold) marcas.push(['b']);
+    if (a.italic) marcas.push(['i']);
+    if (a.strikethrough) marcas.push(['s']);
+    if (t.type === 'mention' && t.mention?.type === 'page') {
+      marcas.push(['a', `https://www.notion.so/${String(t.mention.page.id).replace(/-/g, '')}`]);
+    } else if (t.href) {
+      marcas.push(['a', t.href]);
+    }
+    return marcas.length ? [t.plain_text ?? '', marcas] : [t.plain_text ?? ''];
+  }) as unknown as Rico;
+}
+
+function propriedadesOficiais(b: any): Record<string, unknown> {
+  const c = b[b.type] ?? {};
+  if (b.type === 'child_page') return { title: [[c.title ?? '']] };
+  if (b.type === 'image') return { source: [[c.file?.url ?? c.external?.url ?? '']] };
+  return { title: converterRicoOficial(c.rich_text ?? []) };
+}
+
+/** Desce a árvore inteira de uma página e grava no formato que `renderizar` lê. */
+async function arvoreOficial(id: string, buscar: (id: string) => Promise<any[]>, blocos: Record<string, Registro>): Promise<string[]> {
+  const ids: string[] = [];
+  for (const b of await buscar(id)) {
+    ids.push(b.id);
+    const bloco: Bloco = {
+      id: b.id,
+      type: TIPOS_OFICIAIS[b.type] ?? b.type,
+      alive: true,
+      content: [],
+      properties: propriedadesOficiais(b) as Record<string, Rico>,
+    };
+    blocos[b.id] = { value: { value: bloco } };
+    if (b.has_children && b.type !== 'child_page' && b.type !== 'child_database') {
+      bloco.content = await arvoreOficial(b.id, buscar, blocos);
+    }
+  }
+  return ids;
+}
+
+/** Árvore de uma página a partir de qualquer função que liste filhos (testável sem rede). */
+export async function arvoreOficialDe(paginaId: string, buscar: (id: string) => Promise<any[]>): Promise<Record<string, Registro>> {
+  const blocos: Record<string, Registro> = {};
+  const filhos = await arvoreOficial(paginaId, buscar, blocos);
+  blocos[comTracos(paginaId)] = { value: { value: { id: comTracos(paginaId), type: 'page', alive: true, content: filhos } } };
+  return blocos;
+}
+
+/* ============================================================ escolha */
+
+/**
+ * Com o segredo NOTION_TOKEN: API oficial (estável, a integração só lê).
+ * Sem ele: link público da base (API interna), que já funcionou na migração.
+ */
+export async function listarBase(baseId = BASE_PADRAO): Promise<Linha[]> {
+  const token = segredo('NOTION_TOKEN');
+  return token ? listarBaseOficial(baseId, token) : listarBaseInterna(baseId);
+}
+
 /** Todos os blocos de uma página, seguindo o cursor até o fim. */
 export async function carregarPagina(pageId: string): Promise<Record<string, Registro>> {
+  const token = segredo('NOTION_TOKEN');
+  if (token) return arvoreOficialDe(pageId, (id) => filhosOficiais(id, token));
+  return carregarPaginaInterna(pageId);
+}
+
+/** Todos os blocos de uma página pela API interna, seguindo o cursor até o fim. */
+async function carregarPaginaInterna(pageId: string): Promise<Record<string, Registro>> {
   const blocos: Record<string, Registro> = {};
   let cursor: { stack: unknown[] } = { stack: [] };
   let n = 0;
@@ -425,9 +624,14 @@ export async function sincronizar(db: Banco, agora = Date.now()) {
     erros: [] as string[],
   };
   const eixosNovos = new Set<string>();
+  const inicioLote = Date.now();
+  let tentados = 0;
 
   for (const [i, l] of pendentes.slice(0, LOTE).entries()) {
+    // Tempo esgotado: o resto fica para a próxima rodada, sem perder nada.
+    if (Date.now() - inicioLote > TEMPO_MAX_MS) break;
     if (i) await dormir(350); // gentileza com o limite de frequência do Notion
+    tentados++;
     try {
       const existente = porNotion.get(l.id);
       const blocos = await carregarPagina(l.id);
@@ -464,6 +668,8 @@ export async function sincronizar(db: Banco, agora = Date.now()) {
       relatorio.erros.push(`${l.titulo}: ${(e as Error).message}`);
     }
   }
+
+  relatorio.faltam = pendentes.length - tentados;
 
   // Obra nova no Núcleo com o mesmo nome de um estudo já ligado → bloqueia já.
   for (const a of vinculados) {
