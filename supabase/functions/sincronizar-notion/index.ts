@@ -188,6 +188,15 @@ async function filhosOficiais(id: string, token: string): Promise<any[]> {
 
 /** Acha a base de artigos dentro da página "Central de Artigos" (até 3 níveis). */
 async function acharBase(paginaId: string, token: string): Promise<string> {
+  // Caso comum na "Central de Artigos": a própria página é o banco (visão de banco
+  // em página inteira, link com ?v=). Então o id da página já serve para consultar.
+  try {
+    const banco = await oficial(`databases/${paginaId}`, token);
+    if (banco?.object === 'database') return banco.id;
+  } catch (e) {
+    if (!/HTTP 404/.test((e as Error).message)) throw e;
+  }
+
   const achadas: { id: string; titulo: string }[] = [];
   const fila: { id: string; nivel: number }[] = [{ id: paginaId, nivel: 0 }];
   while (fila.length) {
